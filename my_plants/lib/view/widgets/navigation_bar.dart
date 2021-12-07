@@ -18,6 +18,7 @@ class NavigationBar extends StatelessWidget {
         ],
       ),
       decoration: const BoxDecoration(
+          //32CD32
           color: Color(0xff228B22),
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(50), topRight: Radius.circular(50))),
