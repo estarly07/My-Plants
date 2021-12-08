@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:my_plants/view/widgets/tip_card.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -9,25 +10,10 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          _NavigationBar(),
+          _Layout(),
+          _Navigation(),
         ],
       ),
-    );
-  }
-}
-
-class _NavigationBar extends StatelessWidget {
-  const _NavigationBar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        _Layout(),
-        _Navigation(),
-      ],
     );
   }
 }
@@ -52,19 +38,23 @@ class _LayoutState extends State<_Layout> {
     super.initState();
   }
 
+  final a = ["", "", "", "", ""];
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return GridView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: 5,
-      itemBuilder: (_, i) => CardPlant(),
-      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: (size.width * 0.5),
-          mainAxisExtent: (size.height * 0.37),
-          crossAxisSpacing: 12,
-          mainAxisSpacing: 12),
-    );
+    return ListView(physics: BouncingScrollPhysics(), children: [
+      TipCard(),
+      GridView(
+        shrinkWrap: true, // You won't see infinite size error
+        physics: NeverScrollableScrollPhysics(),
+        children: [...a.map((e) => CardPlant()).toList()],
+        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+            maxCrossAxisExtent: (size.width * 0.5),
+            mainAxisExtent: (size.height * 0.37),
+            crossAxisSpacing: 12,
+            mainAxisSpacing: 12),
+      ),
+    ]);
   }
 }
 
