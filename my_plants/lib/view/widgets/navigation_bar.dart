@@ -52,10 +52,11 @@ class _NavigationBarState extends State<NavigationBar>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _ItemsNavigationBar(icon: Icons.home),
-                  _ItemsNavigationBar(icon: Icons.favorite_outline_rounded),
-                  _ItemsNavigationBar(icon: Icons.read_more),
-                  _ItemsNavigationBar(icon: Icons.person),
+                  _ItemsNavigationBar(icon: Icons.home, route: "home"),
+                  _ItemsNavigationBar(
+                      icon: Icons.favorite_outline_rounded, route: "likes"),
+                  _ItemsNavigationBar(icon: Icons.read_more, route: "all"),
+                  _ItemsNavigationBar(icon: Icons.person, route: ""),
                 ],
               ),
               decoration: const BoxDecoration(
@@ -72,29 +73,72 @@ class _NavigationBarState extends State<NavigationBar>
   }
 }
 
-class _ItemsNavigationBar extends StatelessWidget {
+class _ItemsNavigationBar extends StatefulWidget {
   final IconData icon;
+  final String route;
 
-  const _ItemsNavigationBar({required this.icon});
+  const _ItemsNavigationBar({required this.icon, required this.route});
+
+  @override
+  State<_ItemsNavigationBar> createState() => _ItemsNavigationBarState();
+}
+
+class _ItemsNavigationBarState extends State<_ItemsNavigationBar>
+    with SingleTickerProviderStateMixin {
+  late AnimationController animationController;
+  late Animation<double> scale;
+
+  @override
+  void initState() {
+    animationController =
+        AnimationController(vsync: this, duration: Duration(seconds: 1));
+    scale = Tween(begin: 25.0, end: 35.0).animate(CurvedAnimation(
+        parent: animationController,
+        curve: Interval(0.0, 0.3, curve: Curves.easeInOutBack)));
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(
-          icon,
-          size: 30,
-          color: Colors.white,
-        ),
-        Container(
-          margin: EdgeInsets.all(3),
-          width: 5,
-          height: 5,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(25), color: Colors.white),
-        ),
-      ],
+    return BlocBuilder<NavigationBarBloc, NavigationBarState>(
+      builder: (context, state) {
+        final active = state.route == widget.route;
+        if (active) {
+          animationController.forward();
+        } else {
+          animationController.reset();
+        }
+        return GestureDetector(
+          onTap: () {
+            final changeRouteBloc =
+                BlocProvider.of<NavigationBarBloc>(context, listen: false);
+
+            changeRouteBloc.add(ChangeRouteNavigateEvent(route: widget.route));
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              AnimatedBuilder(
+                animation: animationController,
+                builder: (_, child) => Icon(
+                  widget.icon,
+                  size: active ? scale.value : 30,
+                  color: active ? Colors.white : Colors.white70,
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.all(3),
+                width: 5,
+                height: 5,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(25),
+                    color: active ? Colors.white : Color(0xff008F39)),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

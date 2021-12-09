@@ -3,14 +3,21 @@ part of 'navigation_bar_bloc.dart';
 @immutable
 abstract class NavigationBarState {
   final bool show;
-
-  NavigationBarState({required this.show});
+  final String route;
+  NavigationBarState({this.show = true, required this.route});
 }
 
 class NavigationBarInitial extends NavigationBarState {
-  NavigationBarInitial() : super(show: true);
+  NavigationBarInitial() : super(show: true, route: "home");
 }
 
 class ShowNavigatorState extends NavigationBarState {
-  ShowNavigatorState({bool show = true}) : super(show: show);
+  ShowNavigatorState({required bool show, required String route})
+      : super(show: show, route: route);
+}
+
+class ChangeRouteNavigateState extends NavigationBarState {
+  final String route;
+
+  ChangeRouteNavigateState({required this.route}) : super(route: route);
 }
