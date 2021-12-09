@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_plants/models/plant.dart';
 
 class CardPlant extends StatelessWidget {
-  const CardPlant({Key? key}) : super(key: key);
+  final Plant plant;
+
+  CardPlant({required this.plant});
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +47,9 @@ class CardPlant extends StatelessWidget {
             ],
           ),
           _PlantInfo(
-            name: "UWU",
-            type: "Cactus",
-            image: "",
+            name: plant.name,
+            type: plant.name,
+            image: plant.picture,
           ),
         ],
       ),
@@ -153,11 +156,10 @@ class _PlantImage extends StatelessWidget {
     return Expanded(
         child: Container(
             margin: EdgeInsets.symmetric(horizontal: 10),
-            child: const FadeInImage(
-              placeholder: AssetImage("assets/images/wait_plant.png"),
-              fadeOutDuration: Duration(seconds: 1),
-              image: NetworkImage(
-                  "https://cdn11.bigcommerce.com/s-ym10hve4zo/images/stencil/1920w/products/157/512/6__HB_-_Spider_Plant_-_Chlorophytum_comosum_-_Standard__29128.1619630987.png?c=1"),
+            child: FadeInImage(
+              placeholder: const AssetImage("assets/images/wait_plant.png"),
+              fadeOutDuration: const Duration(seconds: 1),
+              image: NetworkImage(image),
               fit: BoxFit.cover,
             )));
   }

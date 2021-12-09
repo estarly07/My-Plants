@@ -12,7 +12,7 @@ class TipCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      margin: EdgeInsets.only(top: size.height * 0.07, left: 10, right: 10),
+      margin: EdgeInsets.only(top: size.height * 0.03, left: 10, right: 10),
       decoration: _cardDecoration(),
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(15)),
@@ -73,17 +73,16 @@ class TipCard extends StatelessWidget {
   Container _title() {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      child: Text(
-        "Title",
-        style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-      ),
+      child: Text("Title",
+          style: TextStyle(
+              fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black)),
     );
   }
 
   Text _content() {
     return Text(
-      "sssssssssssssssssssssssssssssssssss sssssssssssssssssssssss sssssssssssssssssssssss sssssssssssssssssss ssssssssss sssssssssssssss asdasd asdasd as dasdfer as aweaw asdasdasd a",
-      style: TextStyle(fontSize: 13, height: 1.2),
+      "La ausencia de luz suficiente es una de las razones más habituales por las que una planta de interior te mostrará su “peor cara”.",
+      style: TextStyle(fontSize: 13, height: 1.2, color: Colors.grey[900]),
       textAlign: TextAlign.start,
     );
   }
