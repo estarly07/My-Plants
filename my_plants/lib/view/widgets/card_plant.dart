@@ -115,6 +115,7 @@ class _PlantDescription extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
       margin: const EdgeInsets.all(15),
       child: Row(
@@ -123,16 +124,29 @@ class _PlantDescription extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                name,
-                style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+              Container(
+                width: size.height * 0.135,
+                child: Text(
+                  name,
+                  style: const TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  maxLines: 2,
+                ),
               ),
               Container(
+                width: size.height * 0.135,
                 constraints: const BoxConstraints(maxHeight: 13),
                 child: Text(
                   type,
-                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.grey,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  maxLines: 1,
                 ),
               )
             ],
