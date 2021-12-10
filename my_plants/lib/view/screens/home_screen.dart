@@ -78,22 +78,9 @@ class _LayoutState extends State<_Layout> {
         controller: scrollControler,
         physics: BouncingScrollPhysics(),
         children: [
+          CustomAppbar(),
           TitlePage(),
-          BlocBuilder<TipsBloc, TipsState>(
-            builder: (context, state) {
-              return state.tipRandom == null
-                  ? TipCard(
-                      tip: Tip(
-                          id: "id",
-                          picture: "assets/images/svg/user.svg",
-                          tip: "Cargando consejos...",
-                          url: ""),
-                    )
-                  : TipCard(
-                      tip: TipsService().tipRandom(),
-                    );
-            },
-          ),
+          _tip(),
           BlocBuilder<PlantsBloc, PlantsState>(
             builder: (context, state) {
               return GridView(
@@ -115,6 +102,52 @@ class _LayoutState extends State<_Layout> {
             },
           ),
         ]);
+  }
+
+  BlocBuilder<TipsBloc, TipsState> _tip() {
+    return BlocBuilder<TipsBloc, TipsState>(
+      builder: (context, state) {
+        return state.tipRandom == null
+            ? TipCard(
+                tip: Tip(
+                    id: "id",
+                    picture: "assets/images/svg/user.svg",
+                    tip: "Cargando consejos...",
+                    url: ""),
+              )
+            : TipCard(
+                tip: TipsService().tipRandom(),
+              );
+      },
+    );
+  }
+}
+
+class CustomAppbar extends StatelessWidget {
+  const CustomAppbar({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      height: size.height * 0.1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: const [
+          Icon(
+            Icons.menu,
+            size: 30,
+          ),
+          Icon(
+            Icons.search,
+            size: 30,
+          ),
+        ],
+      ),
+    );
   }
 }
 
