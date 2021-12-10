@@ -12,13 +12,14 @@ class PlantServices {
 
   Future getAllPlants(BuildContext context) async {
     if (allPlants.isEmpty) {
-      final response = await http.get(Uri.parse("$BASE_URL/plants.json"));
+      final response = await http.get(Uri.parse("$BASE_URL$PLANTS"));
       List<Plant> plants = [];
       if (response != null) {
-        print(response.body);
         Map<String, dynamic> map = json.decode(response.body);
+
+        print(map);
         map.forEach((key, value) {
-          plants.add(Plant.fromMap(value));
+          plants.add(Plant.fromMap(value, key));
         });
 
         allPlants = plants;

@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_plants/models/tip.dart';
 
 class TipCard extends StatelessWidget {
+  final Tip tip;
   const TipCard({
+    required this.tip,
     Key? key,
   }) : super(key: key);
 
@@ -21,7 +24,7 @@ class TipCard extends StatelessWidget {
           child: Stack(
             children: [
               Positioned(right: -40, top: -20, child: _tipDecoration()),
-              _tip(),
+              _tip(tip),
             ],
           ),
         ),
@@ -51,17 +54,17 @@ class TipCard extends StatelessWidget {
     );
   }
 
-  Container _tip() {
+  Container _tip(Tip tip) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
       child: Row(
         children: [
-          _Icon_tip(),
+          _Icon_tip(icon: tip.picture),
           Expanded(
             child: Container(
               child: ListTile(
-                title: _title(),
-                subtitle: _content(),
+                title: _title("Consejo"),
+                subtitle: _content(tip.tip),
               ),
             ),
           ),
@@ -70,18 +73,18 @@ class TipCard extends StatelessWidget {
     );
   }
 
-  Container _title() {
+  Container _title(String title) {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
-      child: Text("Title",
+      child: Text(title,
           style: TextStyle(
               fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black)),
     );
   }
 
-  Text _content() {
+  Text _content(String tip) {
     return Text(
-      "La ausencia de luz suficiente es una de las razones más habituales por las que una planta de interior te mostrará su “peor cara”.",
+      tip,
       style: TextStyle(fontSize: 13, height: 1.2, color: Colors.grey[900]),
       textAlign: TextAlign.start,
     );
@@ -89,7 +92,10 @@ class TipCard extends StatelessWidget {
 }
 
 class _Icon_tip extends StatelessWidget {
+  final String icon;
+
   const _Icon_tip({
+    required this.icon,
     Key? key,
   }) : super(key: key);
 
@@ -104,7 +110,7 @@ class _Icon_tip extends StatelessWidget {
           color: ThemeData.light().scaffoldBackgroundColor,
         ),
         child: SvgPicture.asset(
-          "assets/images/svg/wait_plant.svg",
+          icon,
           width: 40,
           height: 40,
         ));

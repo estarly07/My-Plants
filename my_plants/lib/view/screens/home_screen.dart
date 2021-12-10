@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/bloc/navigation_bar/navigation_bar_bloc.dart';
 import 'package:my_plants/bloc/plants/plants_bloc.dart';
+import 'package:my_plants/bloc/tips/tips_bloc.dart';
+import 'package:my_plants/models/tip.dart';
 import 'package:my_plants/services/plants_service.dart';
+import 'package:my_plants/services/tips_service.dart';
 import 'package:my_plants/view/widgets/tip_card.dart';
 import 'package:my_plants/view/widgets/title_page.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
@@ -12,6 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PlantServices().getAllPlants(context);
+    TipsService().getTips(context);
     return Scaffold(
       body: Stack(
         children: [
@@ -75,7 +79,21 @@ class _LayoutState extends State<_Layout> {
         physics: BouncingScrollPhysics(),
         children: [
           TitlePage(),
-          TipCard(),
+          BlocBuilder<TipsBloc, TipsState>(
+            builder: (context, state) {
+              return state.tipRandom == null
+                  ? TipCard(
+                      tip: Tip(
+                          id: "id",
+                          picture: "assets/images/svg/user.svg",
+                          tip: "Cargando consejos...",
+                          url: ""),
+                    )
+                  : TipCard(
+                      tip: TipsService().tipRandom(),
+                    );
+            },
+          ),
           BlocBuilder<PlantsBloc, PlantsState>(
             builder: (context, state) {
               return GridView(

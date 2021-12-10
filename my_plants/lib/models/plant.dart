@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-Plant plantFromMap(String str) => Plant.fromMap(json.decode(str));
+Plant plantFromMap(String str, String id) =>
+    Plant.fromMap(json.decode(str), id);
 
 class Plant {
   Plant({
@@ -17,8 +18,8 @@ class Plant {
   String description;
   Maintenance maintenance;
 
-  factory Plant.fromMap(Map<String, dynamic> json) => Plant(
-        id: json["id"],
+  factory Plant.fromMap(Map<String, dynamic> json, String id) => Plant(
+        id: id,
         name: json["name"],
         picture: json["picture"],
         description: json["description"],
