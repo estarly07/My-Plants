@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_plants/models/plant.dart';
+import 'package:my_plants/view/widgets/progres_circular.dart';
 
 class CardPlant extends StatelessWidget {
   final Plant plant;
@@ -47,9 +48,7 @@ class CardPlant extends StatelessWidget {
             ],
           ),
           _PlantInfo(
-            name: plant.name,
-            type: plant.name,
-            image: plant.picture,
+            plant: plant,
           ),
         ],
       ),
@@ -74,14 +73,10 @@ class _ButtonLike extends StatelessWidget {
 }
 
 class _PlantInfo extends StatelessWidget {
-  final String name;
-  final String type;
-  final String image;
+  final Plant plant;
 
   const _PlantInfo({
-    required this.name,
-    required this.type,
-    required this.image,
+    required this.plant,
   });
 
   @override
@@ -91,11 +86,10 @@ class _PlantInfo extends StatelessWidget {
       child: Column(
         children: [
           _PlantImage(
-            image: image,
+            image: plant.picture,
           ),
           _PlantDescription(
-            name: name,
-            type: type,
+            plant: plant,
           )
         ],
       ),
@@ -104,12 +98,9 @@ class _PlantInfo extends StatelessWidget {
 }
 
 class _PlantDescription extends StatelessWidget {
-  final String name;
-  final String type;
-
+  final Plant plant;
   const _PlantDescription({
-    required this.name,
-    required this.type,
+    required this.plant,
     Key? key,
   }) : super(key: key);
 
@@ -127,7 +118,7 @@ class _PlantDescription extends StatelessWidget {
               Container(
                 width: size.height * 0.135,
                 child: Text(
-                  name,
+                  plant.name,
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -138,9 +129,9 @@ class _PlantDescription extends StatelessWidget {
               ),
               Container(
                 width: size.height * 0.135,
-                constraints: const BoxConstraints(maxHeight: 13),
+                margin: EdgeInsets.only(bottom: 5),
                 child: Text(
-                  type,
+                  plant.nameScientific,
                   style: const TextStyle(
                     fontSize: 14,
                     color: Colors.grey,
@@ -151,7 +142,10 @@ class _PlantDescription extends StatelessWidget {
               )
             ],
           ),
-          Container(width: 25, height: 25, color: Colors.blue)
+          ProgressCircular(
+            lastDay: plant.maintenance.daySummer,
+            today: 1,
+          )
         ],
       ),
     );
