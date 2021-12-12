@@ -103,17 +103,16 @@ class _Icon_tip extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      padding: const EdgeInsets.all(5),
-      width: size.width * 0.22,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: ThemeData.light().scaffoldBackgroundColor,
-      ),
-      /*  child: SvgPicture.asset(
+        padding: const EdgeInsets.all(5),
+        width: size.width * 0.22,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: ThemeData.light().scaffoldBackgroundColor,
+        ),
+        child: SvgPicture.asset(
           icon,
           width: 40,
           height: 40,
-        ) */
-    );
+        ));
   }
 }

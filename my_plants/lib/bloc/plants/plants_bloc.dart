@@ -10,5 +10,11 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
     on<GetAllPlantEvent>((event, emit) {
       emit(GetPlantsState(plants: event.plants));
     });
+    on<SelectPlantEvent>((event, emit) =>
+        {emit(SelectPlantState(state.plants, event.selectPlant!))});
+    on<ShowCharacteristicEvent>((event, emit) => {
+          emit(ShowCharacteristicState(
+              state.plants, state.selectPlant!, event.caracteristic))
+        });
   }
 }

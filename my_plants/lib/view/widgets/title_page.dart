@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
 class TitlePage extends StatelessWidget {
+  final String title;
   const TitlePage({
+    required this.title,
     Key? key,
   }) : super(key: key);
 
@@ -10,7 +12,7 @@ class TitlePage extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10),
       child: Text(
-        "Tus plantas",
+        title,
         style: const TextStyle(
             fontSize: 35,
             fontFamily: "HungryCharlie",

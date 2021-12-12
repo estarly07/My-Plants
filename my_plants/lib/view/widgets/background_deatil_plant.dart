@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class BackgroundDetailPlant extends StatelessWidget {
-  const BackgroundDetailPlant({Key? key}) : super(key: key);
+  String image;
+  BackgroundDetailPlant(this.image);
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +18,7 @@ class BackgroundDetailPlant extends StatelessWidget {
             width: size.width * 0.7,
             child: FadeInImage(
               placeholder: AssetImage("assets/images/wait_plant.png"),
-              image: NetworkImage(
-                  "https://www.aldi.es/content/aldi/spain/promotions/source-localenhancement/2021/2021-12/2021-12-09/plantas/3152/0/0/jcr:content/assets/imported-images/BILD_INTERNET1/a51b54bb95e4cbfbde062646dca6.png/jcr:content/renditions/opt.736w.png.res/1638379622407/opt.736w.png"),
+              image: NetworkImage(image),
               fit: BoxFit.cover,
             )),
       ],
@@ -96,7 +96,7 @@ class _CustomBackground extends CustomPainter {
         //--------PUNTO FINAL
         size.width,
         size.height * 0.05);
-
+    canvas.drawShadow(path, Color(0xff000000), 30, true);
     canvas.drawPath(path, paint);
   }
 
