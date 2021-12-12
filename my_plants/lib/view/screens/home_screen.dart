@@ -7,8 +7,6 @@ import 'package:my_plants/bloc/tips/tips_bloc.dart';
 import 'package:my_plants/models/tip.dart';
 import 'package:my_plants/services/plants_service.dart';
 import 'package:my_plants/services/tips_service.dart';
-import 'package:my_plants/view/widgets/tip_card.dart';
-import 'package:my_plants/view/widgets/title_page.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {

@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Material App',
         routes: routes(),
-        initialRoute: "home",
+        initialRoute: "detail",
         theme: ThemeData.light()
             .copyWith(scaffoldBackgroundColor: Colors.grey[100]),
       ),
