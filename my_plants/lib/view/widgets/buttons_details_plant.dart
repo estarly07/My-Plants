@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/animation.dart';
@@ -12,6 +13,7 @@ class ButtonDetailsPlant extends StatefulWidget {
   final String caracteristic;
   final String icon;
   final bool showContent;
+
   const ButtonDetailsPlant(
       {required this.icon,
       required this.text,
@@ -50,7 +52,6 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
     super.dispose();
   }
 
-  String caracteristicSave = "";
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -59,19 +60,16 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
       children: [
         GestureDetector(
           onTap: () {
-            /* print("$caracteristicSave ${widget.caracteristic}");
-            if (caracteristicSave == widget.caracteristic) {
-              BlocProvider.of<PlantsBloc>(context, listen: false)
-                  .add(ShowCharacteristicEvent(""));
-              animationController.reverse;
-              caracteristicSave = "";
-            } else { */
-            BlocProvider.of<PlantsBloc>(context, listen: false)
-                .add(ShowCharacteristicEvent(widget.caracteristic));
-            animationController.reset();
-            animationController.forward();
-            caracteristicSave = widget.caracteristic;
-            /*   } */
+            final provider =
+                BlocProvider.of<PlantsBloc>(context, listen: false);
+            if (provider.state.caracteristic == widget.caracteristic ||
+                provider.state.caracteristic == "") {
+              startTimer(const Duration(seconds: 2));
+
+              provider.add(ShowCharacteristicEvent(widget.caracteristic));
+              animationController.reset();
+              animationController.forward();
+            }
           },
           child: Container(
             margin: EdgeInsets.symmetric(horizontal: size.width * 0.05),
@@ -97,6 +95,8 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
         ),
         BlocBuilder<PlantsBloc, PlantsState>(
           builder: (context, state) {
+            /*      bool firstTime = (state.caracteristic == ""); */
+
             return (state.caracteristic == widget.caracteristic)
                 ? AnimatedBuilder(
                     animation: animationController,
@@ -105,18 +105,13 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
                       child: Container(
                         padding: EdgeInsets.all(8),
                         width: size.width * 0.6,
-                        child: GestureDetector(
-                          onTap: () {
-                            animationController.reverse();
-                          },
-                          child: CustomPaint(
-                              painter: TriangleIndicator(),
-                              child: Container(
-                                  margin: EdgeInsets.all(5),
-                                  padding:
-                                      EdgeInsets.only(left: size.width * 0.08),
-                                  child: Text(widget.text))),
-                        ),
+                        child: CustomPaint(
+                            painter: TriangleIndicator(),
+                            child: Container(
+                                margin: EdgeInsets.all(5),
+                                padding:
+                                    EdgeInsets.only(left: size.width * 0.08),
+                                child: Text(widget.text))),
                       ),
                     ),
                   )
@@ -125,6 +120,23 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
         )
       ],
     );
+  }
+
+  void startTimer(Duration duration) {
+    int _start = duration.inMilliseconds;
+    const oneDecimal = Duration(milliseconds: 100);
+    Timer _timer = Timer.periodic(
+        oneDecimal,
+        (Timer timer) => setState(() {
+              if (_start < 100) {
+                BlocProvider.of<PlantsBloc>(context, listen: false)
+                    .add(ShowCharacteristicEvent(""));
+                /* animationController.reverse(); */
+                timer.cancel();
+              } else {
+                _start -= 100;
+              }
+            }));
   }
 }
 
