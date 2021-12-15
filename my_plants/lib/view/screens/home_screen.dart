@@ -7,8 +7,6 @@ import 'package:my_plants/bloc/tips/tips_bloc.dart';
 import 'package:my_plants/models/tip.dart';
 import 'package:my_plants/services/plants_service.dart';
 import 'package:my_plants/services/tips_service.dart';
-import 'package:my_plants/view/widgets/tip_card.dart';
-import 'package:my_plants/view/widgets/title_page.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -74,12 +72,15 @@ class _LayoutState extends State<_Layout> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final plantsBloc = BlocProvider.of<PlantsBloc>(context);
     return ListView(
         controller: scrollControler,
         physics: BouncingScrollPhysics(),
         children: [
-          CustomAppbar(),
-          TitlePage(),
+          CustomAppbar(
+            icons: [Icons.menu, Icons.search],
+          ),
+          TitlePage(title: "Tus plantas"),
           _tip(),
           BlocBuilder<PlantsBloc, PlantsState>(
             builder: (context, state) {
@@ -88,8 +89,14 @@ class _LayoutState extends State<_Layout> {
                 physics: NeverScrollableScrollPhysics(),
                 children: [
                   ...state.plants
-                      .map((plant) => CardPlant(
-                            plant: plant,
+                      .map((plant) => GestureDetector(
+                            onTap: () {
+                              plantsBloc.add(SelectPlantEvent(plant));
+                              Navigator.pushNamed(context, "detail");
+                            },
+                            child: CardPlant(
+                              plant: plant,
+                            ),
                           ))
                       .toList()
                 ],
@@ -119,34 +126,6 @@ class _LayoutState extends State<_Layout> {
                 tip: TipsService().tipRandom(),
               );
       },
-    );
-  }
-}
-
-class CustomAppbar extends StatelessWidget {
-  const CustomAppbar({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 10),
-      height: size.height * 0.1,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: const [
-          Icon(
-            Icons.menu,
-            size: 30,
-          ),
-          Icon(
-            Icons.search,
-            size: 30,
-          ),
-        ],
-      ),
     );
   }
 }
