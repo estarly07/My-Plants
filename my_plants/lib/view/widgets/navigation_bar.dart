@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/navigation_bar/navigation_bar_bloc.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -52,11 +54,12 @@ class _NavigationBarState extends State<NavigationBar>
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _ItemsNavigationBar(icon: Icons.home, route: "home"),
                   _ItemsNavigationBar(
-                      icon: Icons.favorite_outline_rounded, route: "likes"),
-                  _ItemsNavigationBar(icon: Icons.read_more, route: "all"),
-                  _ItemsNavigationBar(icon: Icons.person, route: ""),
+                      icon: buttonsNavigation["home"]!, route: "home"),
+                  _ItemsNavigationBar(
+                      icon: buttonsNavigation["recent"]!, route: "recent"),
+                  /*    _ItemsNavigationBar(icon: Icons.read_more, route: "all"),
+                  _ItemsNavigationBar(icon: Icons.person, route: ""), */
                 ],
               ),
               decoration: const BoxDecoration(
@@ -74,7 +77,7 @@ class _NavigationBarState extends State<NavigationBar>
 }
 
 class _ItemsNavigationBar extends StatefulWidget {
-  final IconData icon;
+  final String icon;
   final String route;
 
   const _ItemsNavigationBar({required this.icon, required this.route});
@@ -121,10 +124,13 @@ class _ItemsNavigationBarState extends State<_ItemsNavigationBar>
             children: [
               AnimatedBuilder(
                 animation: animationController,
-                builder: (_, child) => Icon(
-                  widget.icon,
-                  size: active ? scale.value : 30,
-                  color: active ? Colors.white : Colors.white70,
+                builder: (_, child) => SizedBox(
+                  height: active ? scale.value : 30,
+                  width: 100,
+                  child: SvgPicture.asset(
+                    widget.icon,
+                    color: active ? Colors.white : Colors.white70,
+                  ),
                 ),
               ),
               Container(

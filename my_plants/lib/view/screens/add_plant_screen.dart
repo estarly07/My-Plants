@@ -8,6 +8,7 @@ import 'package:my_plants/bloc/plants/plants_bloc.dart';
 import 'package:my_plants/models/plant.dart';
 import 'package:my_plants/services/plants_service.dart';
 import 'package:my_plants/view/widgets/title_page.dart';
+import 'package:my_plants/view/widgets/widgets.dart';
 
 final colors = [
   Colors.pink[100],
@@ -26,13 +27,7 @@ class AddPlantScreen extends StatelessWidget {
         body: Stack(
       fit: StackFit.expand,
       children: [
-        Opacity(
-          opacity: 0.15,
-          child: SvgPicture.asset(
-            "assets/images/svg/fondo.svg",
-            fit: BoxFit.cover,
-          ),
-        ),
+        const BackgrounScreenCustom(),
         SafeArea(
           child: BlocBuilder<PlantsBloc, PlantsState>(
             builder: (context, state) {

@@ -17,10 +17,24 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
+/*           BackgrounScreenCustom(), */
           _Layout(),
           _Navigation(),
         ],
       ),
+      floatingActionButton: GestureDetector(
+        onTap: () {
+          Navigator.pushNamed(context, "add");
+        },
+        child: Container(
+          width: 60,
+          height: 60,
+          decoration:
+              BoxDecoration(color: Color(0xff008F39), shape: BoxShape.circle),
+          child: Icon(Icons.add, color: Colors.white),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
@@ -118,7 +132,7 @@ class _LayoutState extends State<_Layout> {
             ? TipCard(
                 tip: Tip(
                     id: "id",
-                    picture: "assets/images/svg/user.svg",
+                    picture: "assets/images/svg/abonar.svg",
                     tip: "Cargando consejos...",
                     url: ""),
               )
