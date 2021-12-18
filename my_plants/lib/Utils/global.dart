@@ -14,3 +14,24 @@ Map<String, String> buttonAppaBar = {
   "main": "assets/images/svg/ic_menu.svg",
   "left": ""
 };
+
+//------DB-------
+const nameDataBase = "MyPlants.db";
+const version = 1;
+//---------------
+
+//-------TABLA PLANTS
+
+const nameTablePlant = "Plants";
+const idPlant = "idPlant";
+const name = "name";
+const nameScientific = "name_scientific";
+const daySummer = "day_summer";
+const dayWinter = "day_winter";
+const days = "days";
+const typePlant = "type_plant";
+//-------------------
+
+
+
+
