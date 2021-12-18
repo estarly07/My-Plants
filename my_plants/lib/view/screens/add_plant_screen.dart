@@ -3,11 +3,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_plants/bloc/plants/plants_bloc.dart';
+
+import 'package:my_plants/bloc/bloc.dart';
 import 'package:my_plants/models/plant.dart';
-import 'package:my_plants/services/plants_service.dart';
-import 'package:my_plants/view/widgets/title_page.dart';
+import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 final colors = [

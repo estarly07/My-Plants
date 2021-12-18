@@ -6,55 +6,15 @@ import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
 import 'package:my_plants/models/tip.dart';
 import 'package:my_plants/services/services.dart';
-import 'package:my_plants/view/screens/screens.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
+class AllPlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PlantServices().getAllPlants(context);
     TipsService().getTips(context);
-    return Scaffold(
-      drawer: DrawMain(),
-      body: Stack(
-        children: [
-          _screens(),
-          _Navigation(),
-        ],
-      ),
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, "add");
-        },
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration:
-              BoxDecoration(color: Color(0xff008F39), shape: BoxShape.circle),
-          child: Icon(Icons.add, color: Colors.white),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+    return _Layout();
   }
-
-  Widget _screens() =>
-      BlocBuilder<NavigationBarBloc, NavigationBarState>(builder: (_, state) {
-        switch (state.route) {
-          case "home":
-            {
-              return AllPlantScreen();
-            }
-          case "recent":
-            {
-              return RecentScreen();
-            }
-          default:
-            {
-              return Container();
-            }
-        }
-      });
 }
 
 class _Layout extends StatefulWidget {

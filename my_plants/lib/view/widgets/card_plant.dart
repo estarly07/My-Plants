@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:my_plants/models/plant.dart';
-import 'package:my_plants/view/widgets/progres_circular.dart';
+import 'package:my_plants/view/widgets/widgets.dart';
 
 class CardPlant extends StatelessWidget {
   final Plant plant;

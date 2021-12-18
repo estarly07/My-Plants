@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CustomAppbar extends StatelessWidget {
-  final List<IconData> icons;
+  final List<String> icons;
 
   const CustomAppbar({
     required this.icons,
@@ -17,16 +19,20 @@ class CustomAppbar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Icon(
-            icons[0],
-            size: 30,
-          ),
-          icons.length > 1
-              ? Icon(
-                  icons[1],
-                  size: 30,
-                )
-              : Container(),
+          ...icons
+              .map((e) => GestureDetector(
+                    onTap: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                    child: Container(
+                        height: 30,
+                        width: 30,
+                        child: SvgPicture.asset(
+                          e,
+                          color: Colors.black,
+                        )),
+                  ))
+              .toList()
         ],
       ),
     );

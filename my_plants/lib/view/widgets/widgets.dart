@@ -1,4 +1,4 @@
-export 'package:my_plants/view/widgets/background_deatil_plant.dart';
+export 'package:my_plants/view/widgets/background_detail_plant.dart';
 export 'package:my_plants/view/widgets/background_screen_custom.dart';
 export 'package:my_plants/view/widgets/buttons_details_plant.dart';
 export 'package:my_plants/view/widgets/card_plant.dart';
@@ -8,3 +8,4 @@ export 'package:my_plants/view/widgets/navigation_bar.dart';
 export 'package:my_plants/view/widgets/progres_circular.dart';
 export 'package:my_plants/view/widgets/tip_card.dart';
 export 'package:my_plants/view/widgets/title_page.dart';
+export 'package:my_plants/view/widgets/draw_main.dart';

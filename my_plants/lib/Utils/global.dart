@@ -9,3 +9,8 @@ Map<String, String> buttonsNavigation = {
   "home": "assets/images/svg/ic_home.svg",
   "recent": "assets/images/svg/ic_recent.svg",
 };
+Map<String, String> buttonAppaBar = {
+  "search": "assets/images/svg/ic_search.svg",
+  "main": "assets/images/svg/ic_menu.svg",
+  "left": ""
+};

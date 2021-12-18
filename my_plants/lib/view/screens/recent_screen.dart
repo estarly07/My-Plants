@@ -9,7 +9,7 @@ import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/screens/screens.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
+class RecentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PlantServices().getAllPlants(context);
@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
       drawer: DrawMain(),
       body: Stack(
         children: [
-          _screens(),
+          AllPlantScreen(),
           _Navigation(),
         ],
       ),
@@ -37,24 +37,6 @@ class HomeScreen extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
-
-  Widget _screens() =>
-      BlocBuilder<NavigationBarBloc, NavigationBarState>(builder: (_, state) {
-        switch (state.route) {
-          case "home":
-            {
-              return AllPlantScreen();
-            }
-          case "recent":
-            {
-              return RecentScreen();
-            }
-          default:
-            {
-              return Container();
-            }
-        }
-      });
 }
 
 class _Layout extends StatefulWidget {

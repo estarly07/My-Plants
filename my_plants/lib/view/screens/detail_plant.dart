@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_plants/Utils/global.dart';
-import 'package:my_plants/bloc/plants/plants_bloc.dart';
-import 'package:my_plants/models/plant.dart';
 
-import 'package:my_plants/view/widgets/title_page.dart';
+import 'package:my_plants/Utils/global.dart';
+import 'package:my_plants/bloc/bloc.dart';
+import 'package:my_plants/models/plant.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class DetailPlant extends StatelessWidget {
@@ -25,7 +24,7 @@ class DetailPlant extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomAppbar(
-                    icons: [Icons.chevron_left_sharp],
+                    icons: [buttonAppaBar["left"]!],
                   ),
                   TitlePage(
                     title: state.selectPlant!.name,

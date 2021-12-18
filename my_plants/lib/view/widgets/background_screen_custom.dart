@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class BackgrounScreenCustom extends StatelessWidget {
   const BackgrounScreenCustom({
@@ -8,10 +7,10 @@ class BackgrounScreenCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Opacity(
+    return const Opacity(
       opacity: 0.15,
-      child: SvgPicture.asset(
-        "assets/images/svg/fondo.svg",
+      child: Image(
+        image: AssetImage("assets/images/fondo.png"),
         fit: BoxFit.cover,
       ),
     );
