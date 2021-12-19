@@ -34,4 +34,19 @@ class DataBaseService {
     final response = await db.insert(nameTablePlant, plant.toJson());
     return response;
   }
+
+  //update the day to know when to water again the plant
+  Future updateDayPlants() async {
+    final db = await DB.db.instanceDB;
+
+    final responseList = await db.rawQuery("SELECT * FROM $nameTablePlant");
+    List<Plant> list = [];
+    if (responseList != null) {
+      list = responseList.map((e) => Plant.fromJson(e)).toList();
+      list.forEach((plant) {
+        db.rawQuery(
+            "UPDATE $nameTablePlant SET $days = ${plant.days + 1} WHERE $days < ${plant.daySummer} AND $idPlant == ${plant.idPlant!}");
+      });
+    }
+  }
 }

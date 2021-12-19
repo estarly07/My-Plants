@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
     TypesPlantServices().getAllPlants(context);
     DataBaseService().getAllPlants(context);
     TipsService().getTips(context);
+    DataBaseService().updateDayPlants();
     return Scaffold(
       drawer: DrawMain(),
       body: Stack(
