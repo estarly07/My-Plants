@@ -116,7 +116,7 @@ class _LayoutState extends State<_Layout> {
                     url: ""),
               )
             : TipCard(
-                tip: TipsService().tipRandom(),
+                tip: state.tipRandom!,
               );
       },
     );

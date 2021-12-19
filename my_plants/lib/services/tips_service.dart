@@ -10,10 +10,16 @@ import 'package:my_plants/models/tip.dart';
 
 class TipsService {
   static List<Tip> allTips = [];
+  static Tip? tip;
 
   Future getTips(BuildContext context) async {
-    final response = await get(Uri.parse("$BASE_URL$TIPS"));
     final providerTip = BlocProvider.of<TipsBloc>(context, listen: false);
+    if (tip != null) {
+      providerTip.add(GenerateTipRandomEvent(tipRandom: tip!));
+      print("TIP");
+      return;
+    }
+    final response = await get(Uri.parse("$BASE_URL$TIPS"));
 
     if (response.body != null && allTips.isEmpty) {
       Map<String, dynamic> map = json.decode(response.body);
@@ -31,7 +37,7 @@ class TipsService {
 
   Tip tipRandom() {
     final r = Random().nextInt(allTips.length);
-    print("object $r");
-    return allTips[r];
+    tip = allTips[r];
+    return tip!;
   }
 }
