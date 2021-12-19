@@ -14,29 +14,7 @@ class RecentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TypesPlantServices().getAllPlants(context);
-    TipsService().getTips(context);
-    return Scaffold(
-      drawer: DrawMain(),
-      body: Stack(
-        children: [
-          AllPlantScreen(),
-          _Navigation(),
-        ],
-      ),
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, "add");
-        },
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration:
-              BoxDecoration(color: Color(0xff008F39), shape: BoxShape.circle),
-          child: Icon(Icons.add, color: Colors.white),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+    return _Layout();
   }
 }
 
@@ -103,7 +81,7 @@ class _LayoutState extends State<_Layout> {
                 shrinkWrap: true, // You won't see infinite size error
                 physics: NeverScrollableScrollPhysics(),
                 children: [
-                  ...state.plants
+                  ...state.plantsRecents
                       .map((plant) => GestureDetector(
                             onTap: () {
                               /*  plantsBloc.add(SelectPlantEvent(plant));
@@ -138,25 +116,9 @@ class _LayoutState extends State<_Layout> {
                     url: ""),
               )
             : TipCard(
-                tip: TipsService().tipRandom(),
+                tip: state.tipRandom!,
               );
       },
-    );
-  }
-}
-
-class _Navigation extends StatelessWidget {
-  const _Navigation({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      child: Container(
-        child: Align(alignment: Alignment.bottomCenter, child: NavigationBar()),
-      ),
     );
   }
 }

@@ -6,7 +6,7 @@ import 'package:my_plants/model/database/database.dart';
 import 'package:my_plants/models/plant_local.dart';
 
 class DataBaseService {
-  /// Get all local plants of user
+  /// Get all local plants of user (alls and recents)
   Future getAllPlants(BuildContext context) async {
     final db = await DB.db.instanceDB;
     final response = await db.rawQuery('''SELECT * FROM $nameTablePlant''');
@@ -14,11 +14,19 @@ class DataBaseService {
     if (response != null) {
       list = response.map((e) => Plant.fromJson(e)).toList();
     }
-    list.forEach((element) {
-      print(element.typePlant);
-    });
+    getRecentsPlants(context, list);
+  }
+
+  Future getRecentsPlants(BuildContext context, List<Plant> allPlants) async {
+    final db = await DB.db.instanceDB;
+    final response = await db
+        .rawQuery("SELECT * FROM $nameTablePlant WHERE $daySummer = $days");
+    List<Plant> list = [];
+    if (response != null) {
+      list = response.map((e) => Plant.fromJson(e)).toList();
+    }
     BlocProvider.of<PlantsBloc>(context, listen: false)
-        .add(GetPlanstEvent(list));
+        .add(GetPlanstEvent(allPlants, list));
   }
 
   Future<int> insertPlant(Plant plant) async {

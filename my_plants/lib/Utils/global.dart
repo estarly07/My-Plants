@@ -31,6 +31,5 @@ const days = "days";
 const typePlant = "type_plant";
 //-------------------
 
-
-
-
+double calculatePorcentage(int today, int lastDay) =>
+    (100 - ((today * 100) / lastDay));

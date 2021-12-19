@@ -5,5 +5,6 @@ abstract class PlantsEvent {}
 
 class GetPlanstEvent extends PlantsEvent {
   final List<Plant> plants;
-  GetPlanstEvent(this.plants);
+  final List<Plant> plantsRecents;
+  GetPlanstEvent(this.plants, this.plantsRecents);
 }

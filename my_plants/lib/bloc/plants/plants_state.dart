@@ -3,15 +3,17 @@ part of 'plants_bloc.dart';
 @immutable
 abstract class PlantsState {
   final List<Plant> plants;
-
-  PlantsState(this.plants);
+  final List<Plant> plantsRecents;
+  PlantsState(this.plants, this.plantsRecents);
 }
 
 class PlantsInitial extends PlantsState {
-  PlantsInitial() : super([]);
+  PlantsInitial() : super([], []);
 }
 
 class GetPlantsState extends PlantsState {
   final List<Plant> plants;
-  GetPlantsState({required this.plants}) : super(plants);
+  final List<Plant> plantsRecents;
+  GetPlantsState({required this.plants, required this.plantsRecents})
+      : super(plants, plantsRecents);
 }

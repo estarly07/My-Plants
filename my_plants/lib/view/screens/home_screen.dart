@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TypesPlantServices().getAllPlants(context);
+    DataBaseService().getAllPlants(context);
     TipsService().getTips(context);
     return Scaffold(
       drawer: DrawMain(),

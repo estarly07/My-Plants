@@ -16,8 +16,6 @@ class TypesPlantServices {
       List<TypePlant> plants = [];
       if (response != null) {
         Map<String, dynamic> map = json.decode(response.body);
-
-        print(map);
         map.forEach((key, value) {
           plants.add(TypePlant.fromMap(value, key));
         });

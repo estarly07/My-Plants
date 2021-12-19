@@ -6,14 +6,11 @@ import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
 import 'package:my_plants/bloc/plants/plants_bloc.dart';
 import 'package:my_plants/models/tip.dart';
-import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class AllPlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    DataBaseService().getAllPlants(context);
-    TipsService().getTips(context);
     return _Layout();
   }
 }
@@ -119,22 +116,6 @@ class _LayoutState extends State<_Layout> {
                 tip: state.tipRandom!,
               );
       },
-    );
-  }
-}
-
-class _Navigation extends StatelessWidget {
-  const _Navigation({
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 0,
-      child: Container(
-        child: Align(alignment: Alignment.bottomCenter, child: NavigationBar()),
-      ),
     );
   }
 }

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:my_plants/Utils/global.dart';
 
 class ProgressCircular extends StatefulWidget {
   final int lastDay; //How often is it watered
@@ -32,7 +33,7 @@ class _ProgressCircularState extends State<ProgressCircular>
 
   @override
   Widget build(BuildContext context) {
-    final porcentaje = (100 - ((widget.today * 100) / widget.lastDay));
+    final porcentaje = calculatePorcentage(widget.today, widget.lastDay);
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
