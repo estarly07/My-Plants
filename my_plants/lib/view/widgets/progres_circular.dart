@@ -32,7 +32,7 @@ class _ProgressCircularState extends State<ProgressCircular>
 
   @override
   Widget build(BuildContext context) {
-    final porcentaje = ((widget.today * 100) / widget.lastDay);
+    final porcentaje = (100 - ((widget.today * 100) / widget.lastDay));
     return Container(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

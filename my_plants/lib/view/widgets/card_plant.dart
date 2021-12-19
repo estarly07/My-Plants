@@ -1,18 +1,26 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:my_plants/models/plant_local.dart';
 
-import 'package:my_plants/models/plant.dart';
+import 'package:my_plants/models/type_plant.dart';
+import 'package:my_plants/services/plants_service.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class CardPlant extends StatelessWidget {
   final Plant plant;
-
+  late TypePlant typePlant;
   CardPlant({required this.plant});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    for (var typePlant in TypesPlantServices.allTypePlants) {
+      if (plant.typePlant == typePlant.id) {
+        this.typePlant = typePlant;
+        break;
+      }
+    }
     return Container(
       height: (size.width * 0.5),
       width: (size.height * 0.37),
@@ -48,6 +56,7 @@ class CardPlant extends StatelessWidget {
             ],
           ),
           _PlantInfo(
+            typePlant: typePlant,
             plant: plant,
           ),
         ],
@@ -73,9 +82,11 @@ class _ButtonLike extends StatelessWidget {
 }
 
 class _PlantInfo extends StatelessWidget {
+  final TypePlant typePlant;
   final Plant plant;
 
   const _PlantInfo({
+    required this.typePlant,
     required this.plant,
   });
 
@@ -86,10 +97,12 @@ class _PlantInfo extends StatelessWidget {
       child: Column(
         children: [
           _PlantImage(
-            image: plant.picture,
+            image: typePlant.picture,
           ),
           _PlantDescription(
-            plant: plant,
+            plant: typePlant,
+            name: plant.name,
+            days: plant.days,
           )
         ],
       ),
@@ -98,9 +111,13 @@ class _PlantInfo extends StatelessWidget {
 }
 
 class _PlantDescription extends StatelessWidget {
-  final Plant plant;
+  final TypePlant plant;
+  final String name;
+  final int days;
   const _PlantDescription({
     required this.plant,
+    required this.name,
+    required this.days,
     Key? key,
   }) : super(key: key);
 
@@ -118,7 +135,7 @@ class _PlantDescription extends StatelessWidget {
               Container(
                 width: size.height * 0.135,
                 child: Text(
-                  plant.name,
+                  name,
                   style: const TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
@@ -144,7 +161,7 @@ class _PlantDescription extends StatelessWidget {
           ),
           ProgressCircular(
             lastDay: plant.maintenance.daySummer,
-            today: 1,
+            today: days,
           )
         ],
       ),

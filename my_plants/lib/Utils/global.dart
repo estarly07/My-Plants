@@ -21,7 +21,6 @@ const version = 1;
 //---------------
 
 //-------TABLA PLANTS
-
 const nameTablePlant = "Plants";
 const idPlant = "idPlant";
 const name = "name";

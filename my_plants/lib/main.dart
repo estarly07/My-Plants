@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/bloc/bloc.dart';
+import 'package:my_plants/bloc/plants/plants_bloc.dart';
 
 import 'package:my_plants/view/routes/routes.dart';
 
@@ -12,8 +13,9 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => NavigationBarBloc()),
-        BlocProvider(create: (_) => PlantsBloc()),
+        BlocProvider(create: (_) => TypesPlantsBloc()),
         BlocProvider(create: (_) => TipsBloc()),
+        BlocProvider(create: (_) => PlantsBloc())
       ],
       child: MaterialApp(
         title: 'Material App',

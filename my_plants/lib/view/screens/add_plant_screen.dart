@@ -5,7 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:my_plants/bloc/bloc.dart';
-import 'package:my_plants/models/plant.dart';
+import 'package:my_plants/models/type_plant.dart';
+import 'package:my_plants/models/plant_local.dart';
+import 'package:my_plants/services/database_service.dart';
 import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
@@ -21,21 +23,21 @@ final colors = [
 class AddPlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    PlantServices().getAllPlants(context);
+    TypesPlantServices().getAllPlants(context);
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
       children: [
         const BackgrounScreenCustom(),
         SafeArea(
-          child: BlocBuilder<PlantsBloc, PlantsState>(
+          child: BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
             builder: (context, state) {
               return (state.plants.isNotEmpty)
                   ? ListView.builder(
                       itemCount: state.plants.length,
                       physics: BouncingScrollPhysics(),
                       itemBuilder: (_, index) =>
-                          CardAddPlant(plant: state.plants[index]))
+                          CardAddPlant(typePlant: state.plants[index]))
                   : Center(child: CircularProgressIndicator());
             },
           ),
@@ -46,9 +48,9 @@ class AddPlantScreen extends StatelessWidget {
 }
 
 class CardAddPlant extends StatelessWidget {
-  final Plant plant;
+  final TypePlant typePlant;
 
-  const CardAddPlant({Key? key, required this.plant}) : super(key: key);
+  const CardAddPlant({Key? key, required this.typePlant}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -111,7 +113,7 @@ class CardAddPlant extends StatelessWidget {
                     child: FadeInImage(
                         fit: BoxFit.cover,
                         placeholder: AssetImage("assets/images/wait_plant.png"),
-                        image: NetworkImage(plant.picture)),
+                        image: NetworkImage(typePlant.picture)),
                   ),
                 ),
               ],
@@ -147,8 +149,8 @@ class CardAddPlant extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(plant.name),
-                  Text(plant.nameScientific),
+                  Text(typePlant.name),
+                  Text(typePlant.nameScientific),
                   _buttonAdd(size)
                 ],
               ),
@@ -162,19 +164,30 @@ class CardAddPlant extends StatelessWidget {
   Align _buttonAdd(Size size) {
     return Align(
       alignment: Alignment.centerRight,
-      child: Container(
-        margin: EdgeInsets.only(right: size.width * 0.05),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          color: Color(0xff00a000).withOpacity(0.7),
+      child: GestureDetector(
+        onTap: () async {
+          DataBaseService().insertPlant(Plant(
+              name: "name",
+              nameScientific: typePlant.nameScientific,
+              daySummer: typePlant.maintenance.daySummer,
+              dayWinter: typePlant.maintenance.dayWinter,
+              days: 0,
+              typePlant: typePlant.id));
+        },
+        child: Container(
+          margin: EdgeInsets.only(right: size.width * 0.05),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            color: Color(0xff00a000).withOpacity(0.7),
+          ),
+          height: size.height * 0.045,
+          width: size.width * 0.25,
+          child: const Center(
+              child: Text("Añadir",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ))),
         ),
-        height: size.height * 0.045,
-        width: size.width * 0.25,
-        child: const Center(
-            child: Text("Añadir",
-                style: TextStyle(
-                  color: Colors.white,
-                ))),
       ),
     );
   }

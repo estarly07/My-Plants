@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
+import 'package:my_plants/bloc/plants/plants_bloc.dart';
 import 'package:my_plants/models/tip.dart';
 import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
@@ -11,7 +12,7 @@ import 'package:my_plants/view/widgets/widgets.dart';
 class AllPlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    PlantServices().getAllPlants(context);
+    DataBaseService().getAllPlants(context);
     TipsService().getTips(context);
     return _Layout();
   }
@@ -83,8 +84,8 @@ class _LayoutState extends State<_Layout> {
                   ...state.plants
                       .map((plant) => GestureDetector(
                             onTap: () {
-                              plantsBloc.add(SelectPlantEvent(plant));
-                              Navigator.pushNamed(context, "detail");
+                              //plantsBloc.add(SelectPlantEvent(plant));
+                              //Navigator.pushNamed(context, "detail");
                             },
                             child: CardPlant(
                               plant: plant,

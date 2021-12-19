@@ -61,7 +61,7 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
         GestureDetector(
           onTap: () {
             final provider =
-                BlocProvider.of<PlantsBloc>(context, listen: false);
+                BlocProvider.of<TypesPlantsBloc>(context, listen: false);
             if (provider.state.caracteristic == widget.caracteristic ||
                 provider.state.caracteristic == "") {
               startTimer(const Duration(seconds: 2));
@@ -93,7 +93,7 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
             ),
           ),
         ),
-        BlocBuilder<PlantsBloc, PlantsState>(
+        BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
           builder: (context, state) {
             /*      bool firstTime = (state.caracteristic == ""); */
 
@@ -129,7 +129,7 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
         oneDecimal,
         (Timer timer) => setState(() {
               if (_start < 100) {
-                BlocProvider.of<PlantsBloc>(context, listen: false)
+                BlocProvider.of<TypesPlantsBloc>(context, listen: false)
                     .add(ShowCharacteristicEvent(""));
                 /* animationController.reverse(); */
                 timer.cancel();

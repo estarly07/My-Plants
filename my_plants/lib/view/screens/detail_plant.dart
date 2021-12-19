@@ -6,7 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
-import 'package:my_plants/models/plant.dart';
+import 'package:my_plants/models/type_plant.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class DetailPlant extends StatelessWidget {
@@ -17,7 +17,7 @@ class DetailPlant extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        child: BlocBuilder<PlantsBloc, PlantsState>(
+        child: BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
           builder: (context, state) {
             return SafeArea(
               child: Column(
@@ -72,7 +72,7 @@ class InfoPlant extends StatelessWidget {
 }
 
 class DetailsPlant extends StatelessWidget {
-  final Plant plant;
+  final TypePlant plant;
   const DetailsPlant({
     required this.plant,
     Key? key,
@@ -96,7 +96,7 @@ class DetailsPlant extends StatelessWidget {
             ],
           ),
         ),
-        BlocBuilder<PlantsBloc, PlantsState>(
+        BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
           builder: (context, state) {
             return SizedBox(
               width: double.infinity,

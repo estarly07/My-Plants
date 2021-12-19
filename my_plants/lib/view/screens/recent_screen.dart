@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
+import 'package:my_plants/bloc/plants/plants_bloc.dart';
 import 'package:my_plants/models/tip.dart';
 import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/screens/screens.dart';
@@ -12,7 +13,7 @@ import 'package:my_plants/view/widgets/widgets.dart';
 class RecentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    PlantServices().getAllPlants(context);
+    TypesPlantServices().getAllPlants(context);
     TipsService().getTips(context);
     return Scaffold(
       drawer: DrawMain(),
@@ -86,7 +87,7 @@ class _LayoutState extends State<_Layout> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final plantsBloc = BlocProvider.of<PlantsBloc>(context);
+    final plantsBloc = BlocProvider.of<TypesPlantsBloc>(context);
     return ListView(
         controller: scrollControler,
         physics: BouncingScrollPhysics(),
@@ -105,8 +106,8 @@ class _LayoutState extends State<_Layout> {
                   ...state.plants
                       .map((plant) => GestureDetector(
                             onTap: () {
-                              plantsBloc.add(SelectPlantEvent(plant));
-                              Navigator.pushNamed(context, "detail");
+                              /*  plantsBloc.add(SelectPlantEvent(plant));
+                              Navigator.pushNamed(context, "detail"); */
                             },
                             child: CardPlant(
                               plant: plant,
