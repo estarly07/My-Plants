@@ -8,8 +8,8 @@ abstract class TypesPlantsState {
   TypesPlantsState(this.plants, this.selectPlant, this.caracteristic);
 }
 
-class PlantsInitial extends TypesPlantsState {
-  PlantsInitial() : super([], null, "");
+class TypePlantsInitial extends TypesPlantsState {
+  TypePlantsInitial() : super([], null, "");
 }
 
 class GetPlantsState extends TypesPlantsState {

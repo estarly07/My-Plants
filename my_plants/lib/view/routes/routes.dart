@@ -6,6 +6,6 @@ Map<String, WidgetBuilder> routes() {
   return <String, WidgetBuilder>{
     "home": (_) => HomeScreen(),
     "add": (_) => AddPlantScreen(),
-    "detail": (_) => DetailPlant()
+    "detail": (_) => DetailPlant(),
   };
 }

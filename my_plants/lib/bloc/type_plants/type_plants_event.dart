@@ -1,20 +1,20 @@
 part of 'type_plants_bloc.dart';
 
 @immutable
-abstract class PlantsEvent {}
+abstract class TypePlantsEvent {}
 
-class GetAllPlantEvent extends PlantsEvent {
+class GetAllPlantEvent extends TypePlantsEvent {
   List<TypePlant> plants;
 
   GetAllPlantEvent({required this.plants});
 }
 
-class SelectPlantEvent extends PlantsEvent {
+class SelectPlantEvent extends TypePlantsEvent {
   TypePlant? selectPlant;
   SelectPlantEvent(this.selectPlant);
 }
 
-class ShowCharacteristicEvent extends PlantsEvent {
+class ShowCharacteristicEvent extends TypePlantsEvent {
   final String caracteristic;
   ShowCharacteristicEvent(this.caracteristic);
 }

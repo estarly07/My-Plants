@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/plants/plants_bloc.dart';
@@ -7,6 +8,10 @@ import 'package:my_plants/models/plant_local.dart';
 
 class DataBaseService {
   /// Get all local plants of user (alls and recents)
+  DataBaseService._();
+  static final DataBaseService _dataBaseService = DataBaseService._();
+  factory DataBaseService() => _dataBaseService;
+
   Future getAllPlants(BuildContext context) async {
     final db = await DB.db.instanceDB;
     final response = await db.rawQuery('''SELECT * FROM $nameTablePlant''');

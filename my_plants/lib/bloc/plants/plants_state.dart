@@ -11,9 +11,9 @@ class PlantsInitial extends PlantsState {
   PlantsInitial() : super([], []);
 }
 
-class GetPlantsState extends PlantsState {
+class GetPlantsLocalState extends PlantsState {
   final List<Plant> plants;
   final List<Plant> plantsRecents;
-  GetPlantsState({required this.plants, required this.plantsRecents})
+  GetPlantsLocalState({required this.plants, required this.plantsRecents})
       : super(plants, plantsRecents);
 }

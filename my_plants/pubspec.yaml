@@ -27,6 +27,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  android_alarm_manager: ^2.0.2
   bloc: ^8.0.1
   cupertino_icons: ^1.0.2
   flutter:
@@ -35,6 +36,7 @@ dependencies:
   flutter_svg: ^0.23.0+1
   http: ^0.13.4
   path_provider: ^2.0.8
+  shared_preferences: ^2.0.11
   sqflite: ^2.0.1
 
 dev_dependencies:

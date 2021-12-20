@@ -10,7 +10,7 @@ part 'plants_state.dart';
 class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
   PlantsBloc() : super(PlantsInitial()) {
     on<GetPlanstEvent>((event, emit) {
-      emit(GetPlantsState(
+      emit(GetPlantsLocalState(
           plants: event.plants, plantsRecents: event.plantsRecents));
     });
   }
