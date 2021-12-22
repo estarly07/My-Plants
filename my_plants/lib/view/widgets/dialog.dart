@@ -111,8 +111,8 @@ class _Dialog extends StatelessWidget {
         TextButton(
             onPressed: () {
               /* formNameBloc.add(ValidateFormEvent()); */
-              FocusScope.of(context).unfocus();
               if (formKey.currentState?.validate() ?? false) {
+                FocusScope.of(context).unfocus();
                 callback(namePlant);
                 Navigator.of(context).pop();
               }
