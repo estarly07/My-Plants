@@ -9,6 +9,7 @@ import 'package:my_plants/models/type_plant.dart';
 import 'package:my_plants/models/plant_local.dart';
 import 'package:my_plants/services/database_service.dart';
 import 'package:my_plants/services/services.dart';
+import 'package:my_plants/view/widgets/dialog.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 final colors = [
@@ -161,34 +162,42 @@ class CardAddPlant extends StatelessWidget {
     );
   }
 
-  Align _buttonAdd(Size size) {
-    return Align(
-      alignment: Alignment.centerRight,
-      child: GestureDetector(
-        onTap: () async {
-          DataBaseService().insertPlant(Plant(
-              name: "name",
-              nameScientific: typePlant.nameScientific,
-              daySummer: typePlant.maintenance.daySummer,
-              dayWinter: typePlant.maintenance.dayWinter,
-              days: 0,
-              typePlant: typePlant.id));
-        },
-        child: Container(
-          margin: EdgeInsets.only(right: size.width * 0.05),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5),
-            color: Color(0xff00a000).withOpacity(0.7),
+  Widget _buttonAdd(Size size) {
+    return Builder(builder: (context) {
+      return Align(
+        alignment: Alignment.centerRight,
+        child: GestureDetector(
+          onTap: () {
+            showDialogCustom(context, (String name) {
+              insertPlant(name);
+            }, "Añade tu planta");
+          },
+          child: Container(
+            margin: EdgeInsets.only(right: size.width * 0.05),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(5),
+              color: Color(0xff00a000).withOpacity(0.7),
+            ),
+            height: size.height * 0.045,
+            width: size.width * 0.25,
+            child: const Center(
+                child: Text("Añadir",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ))),
           ),
-          height: size.height * 0.045,
-          width: size.width * 0.25,
-          child: const Center(
-              child: Text("Añadir",
-                  style: TextStyle(
-                    color: Colors.white,
-                  ))),
         ),
-      ),
-    );
+      );
+    });
+  }
+
+  Future insertPlant(String name) async {
+    DataBaseService().insertPlant(Plant(
+        name: name,
+        nameScientific: typePlant.nameScientific,
+        daySummer: typePlant.maintenance.daySummer,
+        dayWinter: typePlant.maintenance.dayWinter,
+        days: 0,
+        typePlant: typePlant.id));
   }
 }

@@ -1,7 +1,3 @@
-import 'dart:isolate';
-import 'dart:math';
-import 'dart:ui';
-
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -49,7 +45,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => NavigationBarBloc()),
         BlocProvider(create: (_) => TypesPlantsBloc()),
         BlocProvider(create: (_) => TipsBloc()),
-        BlocProvider(create: (_) => PlantsBloc())
+        BlocProvider(create: (_) => PlantsBloc()),
       ],
       child: MaterialApp(
         title: 'Material App',
