@@ -24,7 +24,7 @@ final colors = [
 class AddPlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    TypesPlantServices().getAllPlants(context);
+    print("ALLL");
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
