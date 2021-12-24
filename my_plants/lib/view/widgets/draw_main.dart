@@ -88,13 +88,17 @@ class _DrawMainState extends State<DrawMain>
                                       child: Column(
                                         children: [
                                           _itemMain(
-                                              "assets/images/svg/ic_favorite.svg"),
+                                              "assets/images/svg/ic_favorite.svg",
+                                              ""),
                                           _itemMain(
-                                              "assets/images/svg/ic_tip.svg"),
+                                              "assets/images/svg/ic_tip.svg",
+                                              ""),
                                           _itemMain(
-                                              "assets/images/svg/ic_type.svg"),
+                                              "assets/images/svg/ic_type.svg",
+                                              "types"),
                                           _itemMain(
-                                              "assets/images/svg/ic_about.svg"),
+                                              "assets/images/svg/ic_about.svg",
+                                              ""),
                                         ],
                                       ),
                                     )
@@ -114,58 +118,65 @@ class _DrawMainState extends State<DrawMain>
         physics: BouncingScrollPhysics(),
         child: Column(
           children: [
+            _itemMainExpanded("assets/images/svg/ic_favorite.svg", "Favoritos",
+                width.value, ""),
             _itemMainExpanded(
-                "assets/images/svg/ic_favorite.svg", "Favoritos", width.value),
-            _itemMainExpanded(
-                "assets/images/svg/ic_tip.svg", "Consejos", width.value),
+                "assets/images/svg/ic_tip.svg", "Consejos", width.value, ""),
             _itemMainExpanded("assets/images/svg/ic_type.svg",
-                "Tipos de plantas", width.value),
+                "Tipos de plantas", width.value, "types"),
             _itemMainExpanded("assets/images/svg/ic_about.svg",
-                "Acerca de la app", width.value),
+                "Acerca de la app", width.value, ""),
           ],
         ),
       ),
     );
   }
 
-  Widget _itemMain(String icon) {
+  Widget _itemMain(String icon, String route) {
     return Column(
       children: [
-        Container(
-            margin: EdgeInsets.only(bottom: 20),
-            height: 30,
-            width: 30,
-            child: SvgPicture.asset(icon, color: Colors.grey[400])),
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, route),
+          child: Container(
+              margin: EdgeInsets.only(bottom: 20),
+              height: 30,
+              width: 30,
+              child: SvgPicture.asset(icon, color: Colors.grey[400])),
+        ),
         const Divider()
       ],
     );
   }
 
-  Widget _itemMainExpanded(String icon, String title, double width) {
+  Widget _itemMainExpanded(
+      String icon, String title, double width, String route) {
     return Builder(builder: (context) {
       final size = MediaQuery.of(context).size;
       return Column(
         children: [
           Container(
             margin: EdgeInsets.only(left: size.width * 0.06),
-            child: Row(children: [
-              _itemMain(icon),
-              (width > size.width * 0.55)
-                  ? Container(
-                      width: width - size.width * 0.35,
-                      margin: EdgeInsets.only(left: 10, bottom: 30),
-                      child: Text(title,
-                          maxLines: 1,
-                          style: TextStyle(
-                            color: Colors.grey[600],
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                          )))
-                  : Container(
-                      width: 0,
-                      height: 0,
-                    ),
-            ]),
+            child: GestureDetector(
+              onTap: () => Navigator.pushNamed(context, route),
+              child: Row(children: [
+                _itemMain(icon, route),
+                (width > size.width * 0.55)
+                    ? Container(
+                        width: width - size.width * 0.35,
+                        margin: EdgeInsets.only(left: 10, bottom: 30),
+                        child: Text(title,
+                            maxLines: 1,
+                            style: TextStyle(
+                              color: Colors.grey[600],
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            )))
+                    : Container(
+                        width: 0,
+                        height: 0,
+                      ),
+              ]),
+            ),
           ),
           const Divider()
         ],

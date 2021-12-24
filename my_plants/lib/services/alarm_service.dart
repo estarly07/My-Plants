@@ -42,6 +42,7 @@ class AlarmService {
 
       duration = 24 - now.hour;
     }
+    print(duration);
     await AndroidAlarmManager.oneShot(
       Duration(hours: duration),
       alarmId,

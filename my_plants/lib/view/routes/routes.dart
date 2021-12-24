@@ -7,5 +7,7 @@ Map<String, WidgetBuilder> routes() {
     "home": (_) => HomeScreen(),
     "add": (_) => AddPlantScreen(),
     "detail": (_) => DetailPlant(),
+    "types": (_) => TypePlantsScreen(),
+    "detail_types": (_) => DetailTypeScreen()
   };
 }

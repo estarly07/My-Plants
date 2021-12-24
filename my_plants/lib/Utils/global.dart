@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 Map<String, String> buttonsDetailPlants = {
   "minimumTemperature": "assets/images/svg/temperatura_min.svg",
   "idealTemperature": "assets/images/svg/temperatura_max.svg",
@@ -14,6 +16,15 @@ Map<String, String> buttonAppaBar = {
   "main": "assets/images/svg/ic_menu.svg",
   "left": ""
 };
+
+final colors = [
+  Colors.pink[100],
+  Colors.blue[100],
+/*   Colors.grey[400], */
+  Colors.orange[100],
+  Colors.purple[100],
+  Colors.yellow[100],
+];
 
 //------DB-------
 const nameDataBase = "MyPlants.db";

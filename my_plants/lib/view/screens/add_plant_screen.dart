@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_plants/Utils/global.dart';
 
 import 'package:my_plants/bloc/bloc.dart';
 import 'package:my_plants/models/type_plant.dart';
@@ -12,19 +13,9 @@ import 'package:my_plants/services/services.dart';
 import 'package:my_plants/view/widgets/dialog.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
-final colors = [
-  Colors.pink[100],
-  Colors.blue[100],
-/*   Colors.grey[400], */
-  Colors.orange[100],
-  Colors.purple[100],
-  Colors.yellow[100],
-];
-
 class AddPlantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    print("ALLL");
     return Scaffold(
         body: Stack(
       fit: StackFit.expand,
@@ -150,7 +141,10 @@ class CardAddPlant extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(typePlant.name),
+                  Text(
+                    "${typePlant.name}",
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   Text(typePlant.nameScientific),
                   _buttonAdd(size)
                 ],

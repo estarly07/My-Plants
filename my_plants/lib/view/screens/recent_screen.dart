@@ -6,14 +6,11 @@ import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
 import 'package:my_plants/bloc/plants/plants_bloc.dart';
 import 'package:my_plants/models/tip.dart';
-import 'package:my_plants/services/services.dart';
-import 'package:my_plants/view/screens/screens.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
 class RecentScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    TypesPlantServices().getAllPlants(context);
     return _Layout();
   }
 }
