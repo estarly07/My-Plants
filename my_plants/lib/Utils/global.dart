@@ -14,7 +14,7 @@ Map<String, String> buttonsNavigation = {
 Map<String, String> buttonAppaBar = {
   "search": "assets/images/svg/ic_search.svg",
   "main": "assets/images/svg/ic_menu.svg",
-  "left": ""
+  "left": "assets/images/svg/back.svg"
 };
 
 final colors = [

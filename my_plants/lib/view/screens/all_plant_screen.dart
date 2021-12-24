@@ -62,7 +62,6 @@ class _LayoutState extends State<_Layout> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final plantsBloc = BlocProvider.of<PlantsBloc>(context);
     return ListView(
         controller: scrollControler,
         physics: BouncingScrollPhysics(),
@@ -81,8 +80,8 @@ class _LayoutState extends State<_Layout> {
                   ...state.plants
                       .map((plant) => GestureDetector(
                             onTap: () {
-                              //plantsBloc.add(SelectPlantEvent(plant));
-                              //Navigator.pushNamed(context, "detail");
+                              Navigator.pushNamed(context, "detail",
+                                  arguments: plant);
                             },
                             child: CardPlant(
                               plant: plant,

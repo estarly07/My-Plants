@@ -30,6 +30,7 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
     with SingleTickerProviderStateMixin {
   late AnimationController animationController;
   late Animation<double> opacity;
+  late Timer? _timer = null;
   @override
   void initState() {
     animationController =
@@ -41,21 +42,21 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
     ).animate(CurvedAnimation(
         parent: animationController,
         curve: Interval(0, 0.5, curve: Curves.ease)));
-    // TODO: implement initState
     super.initState();
   }
 
   @override
   void dispose() {
+    if (_timer != null) {
+      _timer!.cancel();
+    }
     animationController.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    print("object");
     return Row(
       children: [
         GestureDetector(
@@ -125,7 +126,7 @@ class _ButtonDetailsPlantState extends State<ButtonDetailsPlant>
   void startTimer(Duration duration) {
     int _start = duration.inMilliseconds;
     const oneDecimal = Duration(milliseconds: 100);
-    Timer _timer = Timer.periodic(
+    _timer = Timer.periodic(
         oneDecimal,
         (Timer timer) => setState(() {
               if (_start < 100) {

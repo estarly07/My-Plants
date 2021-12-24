@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/bloc.dart';
+import 'package:my_plants/models/plant_local.dart';
 import 'package:my_plants/models/type_plant.dart';
 import 'package:my_plants/view/widgets/widgets.dart';
 
@@ -14,12 +15,19 @@ class DetailPlant extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final plant = ModalRoute.of(context)!.settings.arguments as Plant;
+    TypePlant? typePlant;
+    final blocPlant = BlocProvider.of<TypesPlantsBloc>(context, listen: false);
+
+    for (var type in blocPlant.state.plants) {
+      if (type.id == plant.typePlant) {
+        typePlant = type;
+      }
+    }
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
-          builder: (context, state) {
-            return SafeArea(
+        body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: SafeArea(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -27,19 +35,15 @@ class DetailPlant extends StatelessWidget {
                     icons: [buttonAppaBar["left"]!],
                   ),
                   TitlePage(
-                    title: state.selectPlant!.name,
+                    title: plant.name,
                   ),
                   DetailsPlant(
-                    plant: state.selectPlant!,
+                    plant: typePlant!,
                   ),
-                  InfoPlant(state.selectPlant!.description)
+                  InfoPlant(typePlant.description)
                 ],
               ),
-            );
-          },
-        ),
-      ),
-    );
+            )));
   }
 }
 

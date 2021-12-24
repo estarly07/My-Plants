@@ -3,29 +3,21 @@ part of 'type_plants_bloc.dart';
 @immutable
 abstract class TypesPlantsState {
   List<TypePlant> plants;
-  TypePlant? selectPlant;
   final String caracteristic;
-  TypesPlantsState(this.plants, this.selectPlant, this.caracteristic);
+  TypesPlantsState(this.plants, this.caracteristic);
 }
 
 class TypePlantsInitial extends TypesPlantsState {
-  TypePlantsInitial() : super([], null, "");
+  TypePlantsInitial() : super([], "");
 }
 
 class GetPlantsState extends TypesPlantsState {
   List<TypePlant> plants;
-  GetPlantsState({required this.plants}) : super(plants, null, "");
-}
-
-class SelectPlantState extends TypesPlantsState {
-  final TypePlant selectPlant;
-  SelectPlantState(List<TypePlant> plants, this.selectPlant)
-      : super(plants, selectPlant, "");
+  GetPlantsState({required this.plants}) : super(plants, "");
 }
 
 class ShowCharacteristicState extends TypesPlantsState {
   final String caracteristic;
-  ShowCharacteristicState(
-      List<TypePlant> plants, TypePlant selectPlant, this.caracteristic)
-      : super(plants, selectPlant, caracteristic);
+  ShowCharacteristicState(List<TypePlant> plants, this.caracteristic)
+      : super(plants, caracteristic);
 }
