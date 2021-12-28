@@ -27,18 +27,29 @@ class HomeScreen extends StatelessWidget {
           _Navigation(),
         ],
       ),
-      floatingActionButton: GestureDetector(
-        onTap: () {
-          Navigator.pushNamed(context, "add");
-        },
-        child: Container(
-          width: 60,
-          height: 60,
-          decoration:
-              BoxDecoration(color: Color(0xff008F39), shape: BoxShape.circle),
-          child: Icon(Icons.add, color: Colors.white),
-        ),
-      ),
+      floatingActionButton:
+          BlocBuilder<PlantsBloc, PlantsState>(builder: (context, state) {
+        final isSelecting = state.idPlantsSelects.isNotEmpty;
+        return GestureDetector(
+          onTap: () async {
+            if (isSelecting) {
+              await DataBaseService().deletePlantsSelected(
+                  context: context, idsPlants: state.idPlantsSelects);
+            } else {
+              Navigator.pushNamed(context, "add");
+            }
+          },
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration:
+                BoxDecoration(color: Color(0xff008F39), shape: BoxShape.circle),
+            child: isSelecting
+                ? const Icon(Icons.delete, color: Colors.white)
+                : const Icon(Icons.add, color: Colors.white),
+          ),
+        );
+      }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }

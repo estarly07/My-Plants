@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/bloc/plants/plants_bloc.dart';
@@ -52,6 +51,17 @@ class DataBaseService {
         db.rawQuery(
             "UPDATE $nameTablePlant SET $days = ${plant.days + 1} WHERE $days < ${plant.daySummer} AND $idPlant == ${plant.idPlant!}");
       });
+    }
+  }
+
+  Future deletePlantsSelected(
+      {required BuildContext context, required List<int> idsPlants}) async {
+    final db = await DB.db.instanceDB;
+    for (var id in idsPlants) {
+      print(id);
+      await db.rawDelete(
+          "DELETE FROM ${nameTablePlant} WHERE ${idPlant} = ?", [id]);
+      getAllPlants(context);
     }
   }
 }

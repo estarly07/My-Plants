@@ -26,6 +26,7 @@ class _Layout extends StatefulWidget {
 
 class _LayoutState extends State<_Layout> {
   late ScrollController scrollControler;
+  List<int> idsPlantsSelect = [];
   double _oldY = 0.0;
   bool _showNavigator = true;
   @override
@@ -62,6 +63,7 @@ class _LayoutState extends State<_Layout> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return ListView(
         controller: scrollControler,
         physics: BouncingScrollPhysics(),
@@ -80,11 +82,35 @@ class _LayoutState extends State<_Layout> {
                   ...state.plants
                       .map((plant) => GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, "detail",
-                                  arguments: plant);
+                              if (idsPlantsSelect.isEmpty) {
+                                Navigator.pushNamed(context, "detail",
+                                    arguments: plant);
+                              } else {
+                                _selectPlant(plant.idPlant);
+                              }
                             },
-                            child: CardPlant(
-                              plant: plant,
+                            onLongPress: () {
+                              _selectPlant(plant.idPlant);
+                            },
+                            child: Stack(
+                              fit: StackFit.expand,
+                              children: [
+                                CardPlant(
+                                  plant: plant,
+                                ),
+                                (idsPlantsSelect.contains(plant.idPlant))
+                                    ? Container(
+                                        decoration: BoxDecoration(
+                                            color:
+                                                Colors.black54.withOpacity(0.3),
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        margin: EdgeInsets.symmetric(
+                                            vertical: (size.width * 0.013),
+                                            horizontal: 5),
+                                      )
+                                    : Container()
+                              ],
                             ),
                           ))
                       .toList()
@@ -116,5 +142,25 @@ class _LayoutState extends State<_Layout> {
               );
       },
     );
+  }
+
+  void _selectPlant(int? idPlant) {
+    if (idsPlantsSelect.isEmpty) {
+      idsPlantsSelect.add(idPlant!);
+    } else {
+      bool isDuplicate = false;
+      for (var id in idsPlantsSelect) {
+        if (id == idPlant) {
+          isDuplicate = true;
+        }
+      }
+      if (isDuplicate) {
+        idsPlantsSelect.remove(idPlant!);
+      } else {
+        idsPlantsSelect.add(idPlant!);
+      }
+    }
+    BlocProvider.of<PlantsBloc>(context, listen: false)
+        .add(SelectPlanstEvent(idsPlantsSelect));
   }
 }
