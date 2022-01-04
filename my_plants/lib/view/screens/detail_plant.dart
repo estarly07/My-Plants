@@ -60,7 +60,8 @@ class InfoPlant extends StatelessWidget {
         children: [
           Text(
             "Información",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            style: TextStyle(
+                fontWeight: FontWeight.bold, fontSize: 25, fontFamily: "Ice"),
           ),
           Container(
             margin: EdgeInsets.only(top: 10),

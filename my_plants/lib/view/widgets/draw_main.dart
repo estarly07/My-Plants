@@ -25,7 +25,7 @@ class _DrawMainState extends State<DrawMain>
   @override
   void initState() {
     animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+        vsync: this, duration: const Duration(milliseconds: 210));
     super.initState();
   }
 
@@ -99,6 +99,9 @@ class _DrawMainState extends State<DrawMain>
                                           _itemMain(
                                               "assets/images/svg/ic_about.svg",
                                               ""),
+                                          _itemMain(
+                                              "assets/images/svg/ic_game.svg",
+                                              "game"),
                                         ],
                                       ),
                                     )
@@ -126,6 +129,8 @@ class _DrawMainState extends State<DrawMain>
                 "Tipos de plantas", width.value, "types"),
             _itemMainExpanded("assets/images/svg/ic_about.svg",
                 "Acerca de la app", width.value, ""),
+            _itemMainExpanded(
+                "assets/images/svg/ic_game.svg", "Juego", width.value, "game"),
           ],
         ),
       ),

@@ -38,7 +38,7 @@ class CardPlant extends StatelessWidget {
                 children: [
                   Container(
                     height: size.height * 0.22,
-                    margin: EdgeInsets.all(5),
+                    margin: EdgeInsets.symmetric(horizontal: 5, vertical: 15),
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -180,7 +180,7 @@ class _PlantImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
+            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: FadeInImage(
               placeholder: const AssetImage("assets/images/wait_plant.png"),
               fadeOutDuration: const Duration(seconds: 1),

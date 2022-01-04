@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => TypesPlantsBloc()),
         BlocProvider(create: (_) => TipsBloc()),
         BlocProvider(create: (_) => PlantsBloc()),
+        BlocProvider(create: (_) => GameBloc())
       ],
       child: MaterialApp(
         title: 'Material App',

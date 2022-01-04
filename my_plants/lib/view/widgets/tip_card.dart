@@ -78,14 +78,21 @@ class TipCard extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 10),
       child: Text(title,
           style: TextStyle(
-              fontSize: 17, fontWeight: FontWeight.bold, color: Colors.black)),
+              fontSize: 17,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+              fontFamily: "Hungry")),
     );
   }
 
   Text _content(String tip) {
     return Text(
       tip,
-      style: TextStyle(fontSize: 13, height: 1.2, color: Colors.grey[900]),
+      style: TextStyle(
+        fontSize: 13,
+        height: 1.2,
+        color: Colors.grey[900],
+      ),
       textAlign: TextAlign.start,
     );
   }

@@ -64,7 +64,7 @@ class TypesCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${typePlant.name}",
+                            typePlant.name,
                             maxLines: 1,
                             style: TextStyle(
                                 overflow: TextOverflow.ellipsis,
@@ -75,7 +75,7 @@ class TypesCard extends StatelessWidget {
                             child: Container(
                               padding: EdgeInsets.only(top: 10),
                               child: Text(
-                                "${typePlant.description}",
+                                typePlant.description,
                                 maxLines: 7,
                                 style: TextStyle(
                                   color: Colors.grey,

@@ -2,10 +2,8 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_plants/Utils/global.dart';
 import 'package:my_plants/models/type_plant.dart';
-import 'package:my_plants/view/screens/screens.dart';
 import 'package:my_plants/view/widgets/background_screen_custom.dart';
 
 class DetailTypeScreen extends StatelessWidget {
@@ -43,11 +41,11 @@ class DetailTypeScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    _title(txt: typePlant.name, fontSize: 30),
+                    _title(txt: typePlant.name, fontSize: size.width * 0.1),
                     Text(
-                      "${typePlant.nameScientific}",
+                      typePlant.nameScientific,
                       style: TextStyle(
-                        fontSize: 20,
+                        fontSize: size.width * 0.05,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey[800],
                       ),
@@ -85,7 +83,7 @@ class DetailTypeScreen extends StatelessWidget {
                         typePlant.description,
                         textAlign: TextAlign.justify,
                         style: TextStyle(
-                          color: Colors.grey,
+                          color: Colors.grey[850],
                         ),
                       ),
                     ),
@@ -124,7 +122,8 @@ class _title extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       txt,
-      style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.bold),
+      style: TextStyle(
+          fontSize: fontSize, fontWeight: FontWeight.bold, fontFamily: "Ice"),
     );
   }
 }
