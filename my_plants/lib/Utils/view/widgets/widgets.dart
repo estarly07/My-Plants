@@ -1,0 +1,11 @@
+export 'package:my_plants/Plant_local/ui/widgets/background_detail_plant.dart';
+export 'package:my_plants/Utils/view/widgets/background_screen_custom.dart';
+export 'package:my_plants/Plant_local/ui/widgets/buttons_details_plant.dart';
+export 'package:my_plants/Plant_local/ui/widgets/card_plant.dart';
+export 'package:my_plants/Utils/view/widgets/custom_appbar.dart';
+export 'package:my_plants/Utils/view/widgets/navigation_bar.dart';
+export 'package:my_plants/Plant_local/ui/widgets/progres_circular.dart';
+export 'package:my_plants/Tip/ui/widgets/tip_card.dart';
+export 'package:my_plants/Utils/view/widgets/title_page.dart';
+export 'package:my_plants/Utils/view/widgets/draw_main.dart';
+export 'package:my_plants/Utils/view/widgets/dialog.dart';

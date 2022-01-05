@@ -1,10 +1,10 @@
 import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_plants/bloc/bloc.dart';
-import 'package:my_plants/services/alarm_service.dart';
-import 'package:my_plants/services/shared_preferences.dart';
-import 'package:my_plants/view/routes/routes.dart';
+import 'package:my_plants/Utils/bloc/bloc.dart';
+import 'package:my_plants/Plant_local/repository/services/alarm_service.dart';
+import 'package:my_plants/Utils/services/services.dart';
+import 'package:my_plants/Utils/view/routes/routes.dart';
 
 late final Preferences preferences;
 void main() async {
@@ -20,6 +20,8 @@ void main() async {
 }
 
 class MyApp extends StatefulWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   State<MyApp> createState() => _MyAppState();
 }
