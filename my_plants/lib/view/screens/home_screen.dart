@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 
 import 'package:my_plants/bloc/bloc.dart';
 import 'package:my_plants/services/services.dart';
@@ -12,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     TypesPlantServices().getAllPlants(context);
     DataBaseService().getAllPlants(context);
+    final size = MediaQuery.of(context).size;
     TipsService().getTips(context);
     return Scaffold(
       drawer: DrawMain(),
@@ -20,7 +22,9 @@ class HomeScreen extends StatelessWidget {
           BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
             builder: (context, state) {
               return (state.plants.isEmpty)
-                  ? Center(child: CircularProgressIndicator())
+                  ? Center(
+                      child: Lottie.asset("assets/animations/handling.json",
+                          height: size.width * 0.3, width: size.width * 0.3))
                   : _screens();
             },
           ),
