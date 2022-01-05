@@ -27,7 +27,7 @@ class Game extends StatefulWidget {
 class _GameState extends State<Game> {
   bool showAnimation = false;
   String animation = "";
-  late Timer _timer;
+  Timer? _timer;
 
   late final provider;
   @override
@@ -39,9 +39,7 @@ class _GameState extends State<Game> {
 
   @override
   void dispose() {
-    if (_timer != null) {
-      _timer.cancel();
-    }
+    _timer?.cancel();
     super.dispose();
   }
 
@@ -52,7 +50,7 @@ class _GameState extends State<Game> {
         (Timer timer) => setState(() {
               provider.add(GameStartEvent(false, [], "menu"));
               showAnimation = false;
-              _timer.cancel();
+              _timer?.cancel();
             }));
   }
 
