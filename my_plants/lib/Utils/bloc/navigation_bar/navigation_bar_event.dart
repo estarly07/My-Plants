@@ -4,8 +4,7 @@ part of 'navigation_bar_bloc.dart';
 abstract class NavigationBarEvent {}
 
 class ShowNavigationBarEvent extends NavigationBarEvent {
-  bool show;
-  ShowNavigationBarEvent({this.show = true});
+  ShowNavigationBarEvent();
 }
 
 class ChangeRouteNavigateEvent extends NavigationBarEvent {

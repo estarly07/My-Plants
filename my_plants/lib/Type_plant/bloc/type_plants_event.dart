@@ -4,9 +4,7 @@ part of 'type_plants_bloc.dart';
 abstract class TypePlantsEvent {}
 
 class GetAllPlantEvent extends TypePlantsEvent {
-  List<TypePlant> plants;
-
-  GetAllPlantEvent({required this.plants});
+  GetAllPlantEvent();
 }
 
 class ShowCharacteristicEvent extends TypePlantsEvent {

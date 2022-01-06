@@ -11,10 +11,11 @@ import 'package:my_plants/Utils/view/widgets/widgets.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    TypesPlantServices().getAllPlants(context);
-    DataBaseService().getAllPlants(context);
     final size = MediaQuery.of(context).size;
-    TipsService().getTips(context);
+    BlocProvider.of<PlantsBloc>(context, listen: false).add(GetPlanstEvent());
+    BlocProvider.of<TypesPlantsBloc>(context, listen: false)
+        .add(GetAllPlantEvent());
+    BlocProvider.of<TipsBloc>(context, listen: false).add(GetTipsEvent());
     return Scaffold(
       drawer: DrawMain(),
       body: Stack(
@@ -44,14 +45,19 @@ class HomeScreen extends StatelessWidget {
             }
           },
           child: Container(
-            width: 60,
-            height: 60,
-            decoration:
-                BoxDecoration(color: Color(0xff008F39), shape: BoxShape.circle),
-            child: isSelecting
-                ? const Icon(Icons.delete, color: Colors.white)
-                : const Icon(Icons.add, color: Colors.white),
-          ),
+              width: size.width * 0.17,
+              height: size.width * 0.17,
+              decoration: BoxDecoration(
+                  color: Color(0xff008F39), shape: BoxShape.circle),
+              child: isSelecting
+                  ? Lottie.asset(
+                      "assets/animations/delet.json",
+                      fit: BoxFit.contain,
+                    )
+                  : Lottie.asset(
+                      "assets/animations/add.json",
+                      fit: BoxFit.contain,
+                    )),
         );
       }),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

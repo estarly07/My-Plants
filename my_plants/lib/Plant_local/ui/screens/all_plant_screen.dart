@@ -38,16 +38,15 @@ class _LayoutState extends State<_Layout> {
         _oldY = scrollControler.offset;
         if (_showNavigator) {
           _showNavigator = false;
-          navigatorBloc.add(ShowNavigationBarEvent(show: _showNavigator));
+          navigatorBloc.add(ShowNavigationBarEvent());
         }
       } else {
         _oldY = scrollControler.offset;
         if (!_showNavigator) {
           _showNavigator = true;
-          navigatorBloc.add(ShowNavigationBarEvent(show: _showNavigator));
+          navigatorBloc.add(ShowNavigationBarEvent());
         }
       }
-      //print(_oldY);
     });
     super.initState();
   }
@@ -55,14 +54,13 @@ class _LayoutState extends State<_Layout> {
   @override
   void dispose() {
     scrollControler.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
+    final provider = BlocProvider.of<PlantsBloc>(context, listen: false);
     return ListView(
         controller: scrollControler,
         physics: BouncingScrollPhysics(),
@@ -76,20 +74,20 @@ class _LayoutState extends State<_Layout> {
             builder: (context, state) {
               return GridView(
                 shrinkWrap: true, // You won't see infinite size error
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 children: [
                   ...state.plants
                       .map((plant) => GestureDetector(
                             onTap: () {
-                              if (idsPlantsSelect.isEmpty) {
+                              if (state.idPlantsSelects.isEmpty) {
                                 Navigator.pushNamed(context, "detail",
                                     arguments: plant);
                               } else {
-                                _selectPlant(plant.idPlant);
+                                provider.add(SelectPlanstEvent(plant.idPlant!));
                               }
                             },
                             onLongPress: () {
-                              _selectPlant(plant.idPlant);
+                              provider.add(SelectPlanstEvent(plant.idPlant!));
                             },
                             child: Stack(
                               fit: StackFit.expand,
@@ -97,7 +95,7 @@ class _LayoutState extends State<_Layout> {
                                 CardPlant(
                                   plant: plant,
                                 ),
-                                (idsPlantsSelect.contains(plant.idPlant))
+                                (state.idPlantsSelects.contains(plant.idPlant))
                                     ? Container(
                                         decoration: BoxDecoration(
                                             color:
@@ -141,25 +139,5 @@ class _LayoutState extends State<_Layout> {
               );
       },
     );
-  }
-
-  void _selectPlant(int? idPlant) {
-    if (idsPlantsSelect.isEmpty) {
-      idsPlantsSelect.add(idPlant!);
-    } else {
-      bool isDuplicate = false;
-      for (var id in idsPlantsSelect) {
-        if (id == idPlant) {
-          isDuplicate = true;
-        }
-      }
-      if (isDuplicate) {
-        idsPlantsSelect.remove(idPlant!);
-      } else {
-        idsPlantsSelect.add(idPlant!);
-      }
-    }
-    BlocProvider.of<PlantsBloc>(context, listen: false)
-        .add(SelectPlanstEvent(idsPlantsSelect));
   }
 }

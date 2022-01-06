@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/Plant_local/repository/database/database.dart';
 import 'package:my_plants/Utils/values/global.dart';
-import 'package:my_plants/Utils/bloc/bloc.dart';
 import 'package:my_plants/Plant_local/model/plant_local.dart';
 
 class DataBaseService {
@@ -11,26 +9,21 @@ class DataBaseService {
   static final DataBaseService _dataBaseService = DataBaseService._();
   factory DataBaseService() => _dataBaseService;
 
-  Future getAllPlants(BuildContext context) async {
+  Future<List<Plant>> getAllPlants() async {
     final db = await DB.db.instanceDB;
     final response = await db.rawQuery('''SELECT * FROM $nameTablePlant''');
     List<Plant> list = [];
-    if (response != null) {
-      list = response.map((e) => Plant.fromJson(e)).toList();
-    }
-    getRecentsPlants(context, list);
+    list = response.map((e) => Plant.fromJson(e)).toList();
+    return list;
   }
 
-  Future getRecentsPlants(BuildContext context, List<Plant> allPlants) async {
+  Future<List<Plant>> getRecentsPlants() async {
     final db = await DB.db.instanceDB;
     final response = await db
         .rawQuery("SELECT * FROM $nameTablePlant WHERE $daySummer = $days");
     List<Plant> list = [];
-    if (response != null) {
-      list = response.map((e) => Plant.fromJson(e)).toList();
-    }
-    BlocProvider.of<PlantsBloc>(context, listen: false)
-        .add(GetPlanstEvent(allPlants, list));
+    list = response.map((e) => Plant.fromJson(e)).toList();
+    return list;
   }
 
   Future<int> insertPlant(Plant plant) async {
@@ -47,10 +40,10 @@ class DataBaseService {
     List<Plant> list = [];
     if (responseList != null) {
       list = responseList.map((e) => Plant.fromJson(e)).toList();
-      list.forEach((plant) {
+      for (var plant in list) {
         db.rawQuery(
             "UPDATE $nameTablePlant SET $days = ${plant.days + 1} WHERE $days < ${plant.daySummer} AND $idPlant == ${plant.idPlant!}");
-      });
+      }
     }
   }
 
@@ -58,10 +51,8 @@ class DataBaseService {
       {required BuildContext context, required List<int> idsPlants}) async {
     final db = await DB.db.instanceDB;
     for (var id in idsPlants) {
-      print(id);
       await db.rawDelete(
           "DELETE FROM ${nameTablePlant} WHERE ${idPlant} = ?", [id]);
-      getAllPlants(context);
     }
   }
 }

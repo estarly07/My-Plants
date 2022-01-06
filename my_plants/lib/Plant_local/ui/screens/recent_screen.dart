@@ -37,16 +37,15 @@ class _LayoutState extends State<_Layout> {
         _oldY = scrollControler.offset;
         if (_showNavigator) {
           _showNavigator = false;
-          navigatorBloc.add(ShowNavigationBarEvent(show: _showNavigator));
+          navigatorBloc.add(ShowNavigationBarEvent());
         }
       } else {
         _oldY = scrollControler.offset;
         if (!_showNavigator) {
           _showNavigator = true;
-          navigatorBloc.add(ShowNavigationBarEvent(show: _showNavigator));
+          navigatorBloc.add(ShowNavigationBarEvent());
         }
       }
-      //print(_oldY);
     });
     super.initState();
   }
@@ -54,7 +53,6 @@ class _LayoutState extends State<_Layout> {
   @override
   void dispose() {
     scrollControler.dispose();
-    // TODO: implement dispose
     super.dispose();
   }
 

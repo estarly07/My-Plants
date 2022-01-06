@@ -7,7 +7,7 @@ part 'navigation_bar_state.dart';
 class NavigationBarBloc extends Bloc<NavigationBarEvent, NavigationBarState> {
   NavigationBarBloc() : super(NavigationBarInitial()) {
     on<ShowNavigationBarEvent>((event, emit) {
-      emit(ShowNavigatorState(show: event.show, route: state.route));
+      emit(ShowNavigatorState(show: !state.show, route: state.route));
     });
     on<ChangeRouteNavigateEvent>((event, emit) {
       emit(ChangeRouteNavigateState(route: event.route));
