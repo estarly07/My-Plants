@@ -81,7 +81,7 @@ class _SplashState extends State<Splash> {
   }
 
   nextScreen() {
-    Navigator.pushNamed(context, "home");
     _timer!.cancel();
+    Navigator.pushReplacementNamed(context, "home");
   }
 }
