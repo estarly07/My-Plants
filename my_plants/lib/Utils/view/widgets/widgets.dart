@@ -15,4 +15,5 @@ export 'package:my_plants/Utils/view/widgets/custom_appbar.dart';
 export 'package:my_plants/Utils/view/widgets/dialog.dart';
 export 'package:my_plants/Utils/view/widgets/draw_main.dart';
 export 'package:my_plants/Utils/view/widgets/navigation_bar.dart';
+export 'package:my_plants/Utils/view/widgets/splash.dart';
 export 'package:my_plants/Utils/view/widgets/title_page.dart';
