@@ -24,7 +24,58 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
               plantsRecents: state.plantsRecents,
               idPlantsSelects: _selectPlant(event.idPlant)))
         });
+
+    on<DeletePlantEvent>((event, emit) {
+      final plants = state.plants;
+      final plantsRecents = state.plantsRecents;
+      dataBaseService.deletePlantsSelected(
+          context: event.context, idsPlants: state.idPlantsSelects);
+
+      state.idPlantsSelects.forEach((idPlant) {
+        final plant =
+            plants.firstWhere((element) => element.idPlant == idPlant);
+        if (plants.contains(plant)) {
+          plants.remove(plant);
+        }
+
+        if (plantsRecents.contains(plant)) {
+          plantsRecents.remove(plant);
+        }
+      });
+
+      emit(GetPlantsLocalState(
+        plants: plants,
+        plantsRecents: plantsRecents,
+      ));
+    });
+    on<SavedPlantEvent>((event, emit) {
+      List<Plant> plants = state.plants;
+      List<Plant> plantsRecents = state.plantsRecents;
+
+      print(event.idPlant);
+
+      final plant =
+          plants.firstWhere((element) => element.idPlant == event.idPlant);
+      if (plantsRecents.contains(plant)) {
+        plant.saved = event.saved;
+        final index = plantsRecents.indexOf(plant);
+        plantsRecents.removeAt(index);
+        plantsRecents.insert(index, plant);
+      }
+
+      final index = plants.indexOf(plant);
+      plant.saved = event.saved;
+      plants.removeAt(index);
+      plants.insert(index, plant);
+
+      dataBaseService.plantSaved(event.saved, event.idPlant);
+      emit(GetPlantsLocalState(
+        plants: plants,
+        plantsRecents: plantsRecents,
+      ));
+    });
   }
+
   List<int> idsPlantsSelect = [];
   List<int> _selectPlant(int idPlant) {
     if (idsPlantsSelect.isEmpty) {

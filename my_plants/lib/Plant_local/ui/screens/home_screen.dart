@@ -18,28 +18,33 @@ class HomeScreen extends StatelessWidget {
     BlocProvider.of<TipsBloc>(context, listen: false).add(GetTipsEvent());
     return Scaffold(
       drawer: DrawMain(),
-      body: Stack(
-        children: [
-          BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
-            builder: (context, state) {
-              return (state.plants.isEmpty)
-                  ? Center(
-                      child: Lottie.asset("assets/animations/handling.json",
-                          height: size.width * 0.3, width: size.width * 0.3))
-                  : _screens();
-            },
-          ),
-          _Navigation(),
-        ],
+      body: RefreshIndicator(
+        onRefresh: () {
+          return getPlants(context);
+        },
+        child: Stack(
+          children: [
+            BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
+              builder: (context, state) {
+                return (state.plants.isEmpty)
+                    ? Center(
+                        child: Lottie.asset("assets/animations/handling.json",
+                            height: size.width * 0.3, width: size.width * 0.3))
+                    : _screens();
+              },
+            ),
+            _Navigation(),
+          ],
+        ),
       ),
       floatingActionButton:
           BlocBuilder<PlantsBloc, PlantsState>(builder: (context, state) {
         final isSelecting = state.idPlantsSelects.isNotEmpty;
         return GestureDetector(
-          onTap: () async {
+          onTap: () {
             if (isSelecting) {
-              await DataBaseService().deletePlantsSelected(
-                  context: context, idsPlants: state.idPlantsSelects);
+              BlocProvider.of<PlantsBloc>(context, listen: false)
+                  .add(DeletePlantEvent(context));
             } else {
               Navigator.pushNamed(context, "add");
             }
@@ -81,6 +86,11 @@ class HomeScreen extends StatelessWidget {
             }
         }
       });
+
+  Future<void> getPlants(BuildContext context) async {
+    BlocProvider.of<PlantsBloc>(context, listen: false).add(GetPlanstEvent());
+    return Future.delayed(Duration(seconds: 2));
+  }
 }
 
 class _Navigation extends StatelessWidget {

@@ -33,6 +33,7 @@ class DB {
           day_summer INTEGER,
           day_winter INTEGER,
           days INTEGER,
+          saved BOOLEAN,
           type_plant INTEGER
         )
         ''');

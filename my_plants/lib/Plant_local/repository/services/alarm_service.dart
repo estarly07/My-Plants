@@ -44,7 +44,7 @@ class AlarmService {
     }
     print(duration);
     await AndroidAlarmManager.oneShot(
-      Duration(hours: duration),
+      Duration(hours: 2),
       alarmId,
       callback,
       exact: true,
@@ -55,9 +55,9 @@ class AlarmService {
   static SendPort? uiSendPort;
 
   static Future<void> callback() async {
-    uiSendPort ??= IsolateNameServer.lookupPortByName(isolateName);
-    uiSendPort?.send(null);
     DataBaseService().updateDayPlants();
     activeAlarm();
+    uiSendPort ??= IsolateNameServer.lookupPortByName(isolateName);
+    uiSendPort?.send(null);
   }
 }

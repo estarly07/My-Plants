@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:lottie/lottie.dart';
 import 'package:my_plants/Plant_local/model/plant_local.dart';
 
 import 'package:my_plants/Type_plant/model/type_plant.dart';
@@ -50,7 +51,9 @@ class CardPlant extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(15))),
                   ),
-                  _ButtonLike()
+                  _ButtonLike(
+                    saved: plant.saved,
+                  )
                 ],
               ),
             ],
@@ -65,18 +68,33 @@ class CardPlant extends StatelessWidget {
   }
 }
 
-class _ButtonLike extends StatelessWidget {
+class _ButtonLike extends StatefulWidget {
+  final bool saved;
+
+  const _ButtonLike({Key? key, required this.saved}) : super(key: key);
+
+  @override
+  State<_ButtonLike> createState() => _ButtonLikeState();
+}
+
+class _ButtonLikeState extends State<_ButtonLike> {
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-      child: GestureDetector(
-          onTap: () => print("object"),
-          child: const Icon(
-            Icons.favorite_border,
-            color: Colors.grey,
-            size: 25,
-          )),
+      child: Container(
+          height: size.height * 0.05,
+          width: size.height * 0.05,
+          margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+          child: (widget.saved)
+              ? Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                )
+              : Icon(
+                  Icons.favorite_outline_rounded,
+                  color: Colors.grey,
+                )),
     );
   }
 }

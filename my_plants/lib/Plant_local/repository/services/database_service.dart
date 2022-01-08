@@ -32,6 +32,12 @@ class DataBaseService {
     return response;
   }
 
+  Future plantSaved(bool isSave, int id) async {
+    final db = await DB.db.instanceDB;
+    final response = await db.rawUpdate(
+        "UPDATE $nameTablePlant SET saved = ${(isSave) ? 1 : 0} WHERE $idPlant == $id");
+  }
+
   //update the day to know when to water again the plant
   Future updateDayPlants() async {
     final db = await DB.db.instanceDB;
