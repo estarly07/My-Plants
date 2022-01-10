@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:my_plants/Slider/ui/screen/slider_screen.dart';
 import 'package:my_plants/Utils/view/screens/about_screen.dart';
 import 'package:my_plants/Utils/view/screens/screens.dart';
 import 'package:my_plants/Utils/view/widgets/widgets.dart';
@@ -13,5 +14,6 @@ Map<String, WidgetBuilder> routes() {
     "detail_types": (_) => DetailTypeScreen(),
     "splash": (_) => Splash(),
     "about": (_) => AboutScreen(),
+    "slider": (_) => SliderScreen()
   };
 }
