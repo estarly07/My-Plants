@@ -55,7 +55,7 @@ class _MyAppState extends State<MyApp> {
       child: MaterialApp(
         title: 'Material App',
         routes: routes(),
-        initialRoute: "slider",
+        initialRoute: "splash",
         theme: ThemeData.light()
             .copyWith(scaffoldBackgroundColor: Colors.grey[100]),
       ),

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:my_plants/Utils/services/services.dart';
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
@@ -82,6 +83,7 @@ class _SplashState extends State<Splash> {
 
   nextScreen() {
     _timer!.cancel();
-    Navigator.pushReplacementNamed(context, "home");
+    Navigator.pushReplacementNamed(
+        context, Preferences().firtTime ? "home" : "slider");
   }
 }

@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/Slider/bloc/slider_bloc.dart';
 import 'package:my_plants/Slider/model/slider.dart';
 import 'package:my_plants/Slider/ui/widgets/widgets.dart';
+import 'package:my_plants/Utils/services/services.dart';
 
 class SliderItem extends StatelessWidget {
   const SliderItem({Key? key}) : super(key: key);
@@ -123,7 +124,7 @@ class _SlideState extends State<_Slide> {
                                   duration: Duration(milliseconds: 250),
                                   curve: Curves.easeIn);
                             } else {
-                              //Preferences().firstTime();
+                              Preferences().firstTime();
                               Navigator.pushReplacementNamed(context, "home");
                             }
                           },

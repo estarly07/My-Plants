@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Preferences {
-  List<String> keys = ["alarm", "wins", "fails", "games"];
+  List<String> keys = ["alarm", "wins", "fails", "games", "firts"];
   static final Preferences _instance = Preferences._();
   Preferences._();
 
@@ -27,6 +27,10 @@ class Preferences {
     _preferences.setInt(keys[2], fails + 1);
   }
 
+  void firstTime() {
+    _preferences.setBool(keys[4], !firtTime);
+  }
+
   int get wins => _preferences.getInt(keys[1]) ?? 0;
 
   int get games => _preferences.getInt(keys[3]) ?? 0;
@@ -34,4 +38,6 @@ class Preferences {
   int get fails => _preferences.getInt(keys[2]) ?? 0;
 
   bool get initAlarm => _preferences.getBool(keys[0]) ?? false;
+
+  bool get firtTime => _preferences.getBool(keys[4]) ?? false;
 }
