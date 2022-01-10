@@ -44,3 +44,9 @@ const typePlant = "type_plant";
 
 double calculatePorcentage(int today, int lastDay) =>
     (100 - ((today * 100) / lastDay));
+
+const mision =
+    "My Plants fue creado para ayudarte a mantener tus plantas en optimas condiciones." +
+        " Es una aplicacion que te recuerda cuando necesitas regar tus plantas y te ayudará a salvar muchas" +
+        " vidas. Esta aplicación controlará a todas tus plantas y te notificará cuando necesiten atención. Así nunca volverás" +
+        " a dejar morir tus plantas.";

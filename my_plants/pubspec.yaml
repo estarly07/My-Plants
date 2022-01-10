@@ -87,6 +87,9 @@ flutter:
     - family: Ice
       fonts:
         - asset: fonts/Ice.ttf
+    - family: Hanoman
+      fonts:
+        - asset: fonts/hanoman.ttf
       
 uses-material-design: true
   #       - asset: fonts/TrajanPro_Bold.ttf

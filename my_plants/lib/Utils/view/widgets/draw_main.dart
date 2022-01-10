@@ -98,7 +98,7 @@ class _DrawMainState extends State<DrawMain>
                                               "types"),
                                           _itemMain(
                                               "assets/images/svg/ic_about.svg",
-                                              ""),
+                                              "about"),
                                           _itemMain(
                                               "assets/images/svg/ic_game.svg",
                                               "game"),
@@ -128,7 +128,7 @@ class _DrawMainState extends State<DrawMain>
             _itemMainExpanded("assets/images/svg/ic_type.svg",
                 "Tipos de plantas", width.value, "types"),
             _itemMainExpanded("assets/images/svg/ic_about.svg",
-                "Acerca de la app", width.value, ""),
+                "Acerca de la app", width.value, "about"),
             _itemMainExpanded(
                 "assets/images/svg/ic_game.svg", "Juego", width.value, "game"),
           ],

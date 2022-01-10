@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:my_plants/Utils/view/screens/about_screen.dart';
 import 'package:my_plants/Utils/view/screens/screens.dart';
 import 'package:my_plants/Utils/view/widgets/widgets.dart';
 
@@ -10,6 +11,7 @@ Map<String, WidgetBuilder> routes() {
     "types": (_) => const TypePlantsScreen(),
     "game": (_) => Game(),
     "detail_types": (_) => DetailTypeScreen(),
-    "splash": (_) => Splash()
+    "splash": (_) => Splash(),
+    "about": (_) => AboutScreen(),
   };
 }
