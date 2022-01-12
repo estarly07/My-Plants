@@ -137,7 +137,7 @@ class _DrawMainState extends State<DrawMain>
         child: Column(
           children: [
             _itemMainExpanded("assets/images/svg/ic_favorite.svg", "Favoritos",
-                width.value, ""),
+                width.value, "favorites"),
             _itemMainExpanded(
                 "assets/images/svg/ic_tip.svg", "Consejos", width.value, ""),
             _itemMainExpanded("assets/images/svg/ic_type.svg",

@@ -70,4 +70,10 @@ class DataBaseService {
     list = response.map((e) => Plant.fromJson(e)).toList();
     return list;
   }
+
+  Future updateNamePlant(String newName, int id) async {
+    final db = await DB.db.instanceDB;
+    db.rawQuery(
+        "UPDATE $nameTablePlant SET $name = '$newName' WHERE $idPlant == $id");
+  }
 }

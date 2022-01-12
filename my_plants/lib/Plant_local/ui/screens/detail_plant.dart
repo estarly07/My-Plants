@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_plants/Plant_local/repository/services/database_service.dart';
 
 import 'package:my_plants/Utils/values/global.dart';
 import 'package:my_plants/Utils/bloc/bloc.dart';
@@ -94,6 +95,22 @@ class _InfoPlantState extends State<InfoPlant> {
                 ),
                 GestureDetector(
                   onTap: () {
+                    showDialogCustom(context, (String name) {
+                      updatePlant(name);
+                    }, "Modifica a ${widget.plant.name}", true);
+                  },
+                  child: ElasticInRight(
+                    child: Container(
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.grey,
+                        size: size.height * 0.045,
+                      ),
+                    ),
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () {
                     widget.saved = !widget.saved;
                     BlocProvider.of<PlantsBloc>(context, listen: false).add(
                         SavedPlantEvent(widget.saved, widget.plant.idPlant!));
@@ -134,6 +151,14 @@ class _InfoPlantState extends State<InfoPlant> {
         ],
       ),
     );
+  }
+
+  Future updatePlant(String name) async {
+    DataBaseService().updateNamePlant(name, widget.plant.idPlant!);
+    BlocProvider.of<PlantsBloc>(context).add(GetPlantsFavoritesEvent());
+    setState(() {
+      widget.plant.name = name;
+    });
   }
 }
 

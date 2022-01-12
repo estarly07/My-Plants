@@ -176,7 +176,7 @@ class CardAddPlant extends StatelessWidget {
           onTap: () {
             showDialogCustom(context, (String name) {
               insertPlant(name);
-            }, "Añade tu planta");
+            }, "Añade tu planta", false);
           },
           child: Container(
             margin: EdgeInsets.only(right: size.width * 0.05),

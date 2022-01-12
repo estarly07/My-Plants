@@ -69,12 +69,9 @@ class _NavigationBarState extends State<NavigationBar>
                     textAlignLeft: true,
                     name: "Recientes",
                   ),
-                  /*    _ItemsNavigationBar(icon: Icons.read_more, route: "all"),
-                  _ItemsNavigationBar(icon: Icons.person, route: ""), */
                 ],
               ),
               decoration: const BoxDecoration(
-                  //32CD32
                   color: Color(0xff008F39),
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40),
