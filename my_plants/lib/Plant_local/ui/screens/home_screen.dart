@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -27,10 +28,14 @@ class HomeScreen extends StatelessWidget {
             BlocBuilder<TypesPlantsBloc, TypesPlantsState>(
               builder: (context, state) {
                 return (state.plants.isEmpty)
-                    ? Center(
-                        child: Lottie.asset("assets/animations/handling.json",
-                            height: size.width * 0.3, width: size.width * 0.3))
-                    : _screens();
+                    ? FadeIn(
+                        child: Center(
+                            child: Lottie.asset(
+                                "assets/animations/handling.json",
+                                height: size.width * 0.3,
+                                width: size.width * 0.3)),
+                      )
+                    : FadeInUp(child: _screens());
               },
             ),
             _Navigation(),

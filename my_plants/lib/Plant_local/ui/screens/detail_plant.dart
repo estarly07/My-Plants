@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -70,23 +71,26 @@ class _InfoPlantState extends State<InfoPlant> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      widget.plant.name,
-                      style: TextStyle(
-                          fontSize: size.height * 0.05,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 2),
-                    ),
-                    Text(
-                      widget.plant.nameScientific,
-                      style: TextStyle(
-                        fontSize: size.height * 0.02,
+                FadeInUp(
+                  delay: Duration(milliseconds: 100),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.plant.name,
+                        style: TextStyle(
+                            fontSize: size.height * 0.05,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 2),
                       ),
-                    ),
-                  ],
+                      Text(
+                        widget.plant.nameScientific,
+                        style: TextStyle(
+                          fontSize: size.height * 0.02,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
                 GestureDetector(
                   onTap: () {
@@ -95,31 +99,36 @@ class _InfoPlantState extends State<InfoPlant> {
                         SavedPlantEvent(widget.saved, widget.plant.idPlant!));
                     setState(() {});
                   },
-                  child: Container(
-                    child: (widget.saved)
-                        ? Lottie.asset("assets/animations/like.json",
-                            animate: widget.saved,
-                            repeat: false,
-                            height: size.height * 0.075,
-                            width: size.height * 0.075)
-                        : Container(
-                            margin: EdgeInsets.only(right: 10),
-                            child: Icon(
-                              Icons.favorite_outline_rounded,
-                              color: Colors.grey,
-                              size: size.height * 0.045,
+                  child: ElasticInRight(
+                    child: Container(
+                      child: (widget.saved)
+                          ? Lottie.asset("assets/animations/like.json",
+                              animate: widget.saved,
+                              repeat: false,
+                              height: size.height * 0.075,
+                              width: size.height * 0.075)
+                          : Container(
+                              margin: EdgeInsets.only(right: 10),
+                              child: Icon(
+                                Icons.favorite_outline_rounded,
+                                color: Colors.grey,
+                                size: size.height * 0.045,
+                              ),
                             ),
-                          ),
+                    ),
                   ),
                 )
               ],
             ),
           ),
-          Container(
-            margin: EdgeInsets.only(top: 10),
-            child: Text(
-              widget.content,
-              style: TextStyle(color: Colors.grey[700]),
+          FadeInUp(
+            delay: Duration(milliseconds: 200),
+            child: Container(
+              margin: EdgeInsets.only(top: 10),
+              child: Text(
+                widget.content,
+                style: TextStyle(color: Colors.grey[700]),
+              ),
             ),
           ),
         ],
@@ -161,32 +170,44 @@ class DetailsPlant extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  ButtonDetailsPlant(
-                      icon: buttonsDetailPlants["minimumTemperature"]!,
-                      caracteristic: "minimumTemperature",
-                      showContent: state.caracteristic == "minimumTemperature"
-                          ? true
-                          : false,
-                      text: plant.maintenance.minimumTemperature),
-                  ButtonDetailsPlant(
-                      icon: buttonsDetailPlants["idealTemperature"]!,
-                      caracteristic: "idealTemperature",
-                      showContent: state.caracteristic == "idealTemperature"
-                          ? true
-                          : false,
-                      text: plant.maintenance.idealTemperature),
-                  ButtonDetailsPlant(
-                      icon: buttonsDetailPlants["sunlight"]!,
-                      caracteristic: "sunlight",
-                      showContent:
-                          state.caracteristic == "sunlight" ? true : false,
-                      text: plant.maintenance.sunlight),
-                  ButtonDetailsPlant(
-                      icon: buttonsDetailPlants["irrigation"]!,
-                      caracteristic: "irrigation",
-                      showContent:
-                          state.caracteristic == "irrigation" ? true : false,
-                      text: plant.maintenance.irrigation),
+                  FadeInLeft(
+                    delay: Duration(milliseconds: 100),
+                    child: ButtonDetailsPlant(
+                        icon: buttonsDetailPlants["minimumTemperature"]!,
+                        caracteristic: "minimumTemperature",
+                        showContent: state.caracteristic == "minimumTemperature"
+                            ? true
+                            : false,
+                        text: plant.maintenance.minimumTemperature),
+                  ),
+                  FadeInLeft(
+                    delay: Duration(milliseconds: 200),
+                    child: ButtonDetailsPlant(
+                        icon: buttonsDetailPlants["idealTemperature"]!,
+                        caracteristic: "idealTemperature",
+                        showContent: state.caracteristic == "idealTemperature"
+                            ? true
+                            : false,
+                        text: plant.maintenance.idealTemperature),
+                  ),
+                  FadeInLeft(
+                    delay: Duration(milliseconds: 300),
+                    child: ButtonDetailsPlant(
+                        icon: buttonsDetailPlants["sunlight"]!,
+                        caracteristic: "sunlight",
+                        showContent:
+                            state.caracteristic == "sunlight" ? true : false,
+                        text: plant.maintenance.sunlight),
+                  ),
+                  FadeInLeft(
+                    delay: Duration(milliseconds: 400),
+                    child: ButtonDetailsPlant(
+                        icon: buttonsDetailPlants["irrigation"]!,
+                        caracteristic: "irrigation",
+                        showContent:
+                            state.caracteristic == "irrigation" ? true : false,
+                        text: plant.maintenance.irrigation),
+                  ),
                 ],
               ),
             );

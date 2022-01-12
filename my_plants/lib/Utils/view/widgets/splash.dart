@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -34,40 +35,46 @@ class _SplashState extends State<Splash> {
             Container(
               margin: EdgeInsets.only(bottom: size.height * 0.35),
               child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                        width: size.height * 0.2,
-                        margin: EdgeInsets.only(bottom: size.height * 0.01),
-                        child: Center(
-                            child: Image(
-                                image: AssetImage("assets/images/logo.png")))),
-                    Container(
-                      margin: EdgeInsets.only(top: size.height * 0.01),
-                      child: Text(
-                        "My Plants",
-                        style: TextStyle(
-                            fontFamily: "Mouse",
-                            letterSpacing: 3,
-                            fontStyle: FontStyle.italic,
-                            color: Colors.grey[600],
-                            fontSize: size.height * 0.04),
+                child: FadeInUp(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                          width: size.height * 0.2,
+                          margin: EdgeInsets.only(bottom: size.height * 0.01),
+                          child: Center(
+                              child: Image(
+                                  image:
+                                      AssetImage("assets/images/logo.png")))),
+                      Container(
+                        margin: EdgeInsets.only(top: size.height * 0.01),
+                        child: Text(
+                          "My Plants",
+                          style: TextStyle(
+                              fontFamily: "Mouse",
+                              letterSpacing: 3,
+                              fontStyle: FontStyle.italic,
+                              color: Colors.grey[600],
+                              fontSize: size.height * 0.04),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(
-                  bottom: size.height * 0.04, top: size.height * 0.04),
-              child: Text(
-                "Estarly",
-                style: TextStyle(
-                    fontFamily: "Hanoman",
-                    fontWeight: FontWeight.bold,
-                    fontSize: size.height * 0.025),
+            FadeInUp(
+              delay: Duration(milliseconds: 500),
+              child: Container(
+                margin: EdgeInsets.only(
+                    bottom: size.height * 0.04, top: size.height * 0.04),
+                child: Text(
+                  "Estarly",
+                  style: TextStyle(
+                      fontFamily: "Hanoman",
+                      fontWeight: FontWeight.bold,
+                      fontSize: size.height * 0.025),
+                ),
               ),
             ),
           ],

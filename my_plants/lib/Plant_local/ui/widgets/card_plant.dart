@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -150,29 +151,35 @@ class _PlantDescription extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: size.height * 0.135,
-                child: Text(
-                  name,
-                  style: const TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.bold,
-                    overflow: TextOverflow.ellipsis,
+              FadeIn(
+                delay: Duration(milliseconds: 150),
+                child: Container(
+                  width: size.height * 0.135,
+                  child: Text(
+                    name,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.bold,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 2,
                   ),
-                  maxLines: 2,
                 ),
               ),
-              Container(
-                width: size.height * 0.135,
-                margin: EdgeInsets.only(bottom: 5),
-                child: Text(
-                  plant.nameScientific,
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey,
-                    overflow: TextOverflow.ellipsis,
+              FadeIn(
+                delay: Duration(milliseconds: 100),
+                child: Container(
+                  width: size.height * 0.135,
+                  margin: EdgeInsets.only(bottom: 5),
+                  child: Text(
+                    plant.nameScientific,
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 1,
                   ),
-                  maxLines: 1,
                 ),
               )
             ],

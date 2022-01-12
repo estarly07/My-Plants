@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -14,54 +15,79 @@ class AboutScreen extends StatelessWidget {
         width: size.width,
         child: ListView(
           children: [
-            _Header(size: size),
+            ElasticIn(child: _Header(size: size)),
             SizedBox(
               height: size.height * 0.05,
             ),
-            Container(
-              margin: EdgeInsets.only(left: size.width * 0.02),
-              child: Text(
-                "Programador  🖥️",
-                style: TextStyle(
-                    fontSize: size.height * 0.03, fontWeight: FontWeight.bold),
+            FadeInLeft(
+              delay: Duration(milliseconds: 50),
+              child: Container(
+                margin: EdgeInsets.only(left: size.width * 0.02),
+                child: Text(
+                  "Programador  🖥️",
+                  style: TextStyle(
+                      fontSize: size.height * 0.03,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-            Container(
-                margin: EdgeInsets.only(left: size.width * 0.04),
-                child: Text(" Estarly Jesús Amaya T.")),
-            Container(
-              margin: EdgeInsets.only(
-                  left: size.width * 0.02,
-                  top: size.height * 0.1,
-                  bottom: size.height * 0.02),
-              child: Text(
-                "Misión  💼",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: size.height * 0.03, fontWeight: FontWeight.bold),
+            FadeInLeft(
+              delay: Duration(milliseconds: 200),
+              child: Container(
+                  margin: EdgeInsets.only(left: size.width * 0.04),
+                  child: Text(" Estarly Jesús Amaya T.")),
+            ),
+            FadeInDown(
+              delay: Duration(milliseconds: 200),
+              child: Container(
+                margin: EdgeInsets.only(
+                    left: size.width * 0.02,
+                    top: size.height * 0.1,
+                    bottom: size.height * 0.02),
+                child: Text(
+                  "Misión  💼",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      fontSize: size.height * 0.03,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(left: size.width * 0.03),
-              child: Text(
-                mision,
-                textAlign: TextAlign.justify,
-                style: TextStyle(),
+            FadeInDown(
+              delay: Duration(milliseconds: 400),
+              child: Container(
+                margin: EdgeInsets.only(left: size.width * 0.03),
+                child: Text(
+                  mision,
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(),
+                ),
               ),
             ),
-            Container(
-              margin: EdgeInsets.only(
-                  left: size.width * 0.03, top: size.height * 0.05),
-              child: Text(
-                "Características",
-                textAlign: TextAlign.justify,
-                style: TextStyle(fontSize: size.height * 0.025),
+            FadeInDown(
+              delay: Duration(milliseconds: 450),
+              child: Container(
+                margin: EdgeInsets.only(
+                    left: size.width * 0.03, top: size.height * 0.05),
+                child: Text(
+                  "Características",
+                  textAlign: TextAlign.justify,
+                  style: TextStyle(fontSize: size.height * 0.025),
+                ),
               ),
             ),
-            _Point(text: "Controla todas las plantas de casa."),
-            _Point(
-                text: "Recibe notificaciones cuando una planta necesite agua."),
-            _Point(text: "Ayuda para intervarlos de regadio."),
+            FadeInLeft(
+                delay: Duration(milliseconds: 200),
+                child: _Point(text: "Controla todas las plantas de casa.")),
+            FadeInLeft(
+              delay: Duration(milliseconds: 300),
+              child: _Point(
+                  text:
+                      "Recibe notificaciones cuando una planta necesite agua."),
+            ),
+            FadeInLeft(
+                delay: Duration(milliseconds: 400),
+                child: _Point(text: "Ayuda para intervarlos de regadio.")),
             Container(
               margin: EdgeInsets.only(
                   left: size.width * 0.03, top: size.height * 0.05),

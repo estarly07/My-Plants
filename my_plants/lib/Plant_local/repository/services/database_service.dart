@@ -61,4 +61,13 @@ class DataBaseService {
           "DELETE FROM ${nameTablePlant} WHERE ${idPlant} = ?", [id]);
     }
   }
+
+  Future<List<Plant>> getFavoritesPlants() async {
+    final db = await DB.db.instanceDB;
+    final response =
+        await db.rawQuery("SELECT * FROM $nameTablePlant WHERE $saved = 1");
+    List<Plant> list = [];
+    list = response.map((e) => Plant.fromJson(e)).toList();
+    return list;
+  }
 }

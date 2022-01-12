@@ -40,6 +40,7 @@ const daySummer = "day_summer";
 const dayWinter = "day_winter";
 const days = "days";
 const typePlant = "type_plant";
+const saved = "saved";
 //-------------------
 
 double calculatePorcentage(int today, int lastDay) =>

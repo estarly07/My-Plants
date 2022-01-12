@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -20,25 +21,31 @@ class MenuGame extends StatelessWidget {
           SafeArea(
             child: ListView(
               children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      bottom: size.height * 0.05,
-                      top: size.height * 0.05,
-                      left: size.height * 0.01),
-                  child: Text(
-                    "Busca las plantas!!",
-                    style: TextStyle(
-                        fontSize: 45,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Midnight"),
+                FadeInDown(
+                  delay: Duration(milliseconds: 20),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        bottom: size.height * 0.05,
+                        top: size.height * 0.05,
+                        left: size.height * 0.01),
+                    child: Text(
+                      "Busca las plantas!!",
+                      style: TextStyle(
+                          fontSize: 45,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: "Midnight"),
+                    ),
                   ),
                 ),
-                Container(
-                  margin: EdgeInsets.only(
-                      bottom: size.height * 0.05, left: size.height * 0.01),
-                  child: Text(
-                    "Encuentra las parejas para ganar\nBuena suerte 😊",
-                    style: TextStyle(fontSize: 18),
+                FadeInDown(
+                  delay: Duration(milliseconds: 100),
+                  child: Container(
+                    margin: EdgeInsets.only(
+                        bottom: size.height * 0.05, left: size.height * 0.01),
+                    child: Text(
+                      "Encuentra las parejas para ganar\nBuena suerte 😊",
+                      style: TextStyle(fontSize: 18),
+                    ),
                   ),
                 ),
                 Row(
@@ -72,26 +79,28 @@ class MenuGame extends StatelessWidget {
                       bottom: size.height * 0.05,
                       top: size.height * 0.05,
                       left: size.height * 0.01),
-                  child: GridView(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      children: [
-                        CardLevelGame(
-                          cantCards: 4,
-                          title: "Fácil",
-                          image: "assets/images/easy.png",
-                        ),
-                        CardLevelGame(
-                          cantCards: 5,
-                          title: "Medio",
-                          image: "assets/images/medio.png",
-                        ),
-                      ],
-                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                          maxCrossAxisExtent: (size.width * 0.5),
-                          mainAxisExtent: (size.height * 0.24),
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 20)),
+                  child: FadeInDown(
+                    child: GridView(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        children: [
+                          CardLevelGame(
+                            cantCards: 4,
+                            title: "Fácil",
+                            image: "assets/images/easy.png",
+                          ),
+                          CardLevelGame(
+                            cantCards: 5,
+                            title: "Medio",
+                            image: "assets/images/medio.png",
+                          ),
+                        ],
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: (size.width * 0.5),
+                            mainAxisExtent: (size.height * 0.24),
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 20)),
+                  ),
                 ),
               ],
             ),
@@ -105,19 +114,29 @@ class MenuGame extends StatelessWidget {
       String image, Size textSize) {
     return Column(
       children: [
-        SvgPicture.asset(
-          image,
-          height: height,
-          width: width,
+        FadeInDown(
+          delay: Duration(milliseconds: 150),
+          child: SvgPicture.asset(
+            image,
+            height: height,
+            width: width,
+          ),
         ),
-        Text(
-          title,
-          style: TextStyle(fontSize: textSize.width * 0.04, color: Colors.grey),
+        FadeInDown(
+          delay: Duration(milliseconds: 175),
+          child: Text(
+            title,
+            style:
+                TextStyle(fontSize: textSize.width * 0.04, color: Colors.grey),
+          ),
         ),
-        Text(
-          score,
-          style: TextStyle(
-              fontSize: textSize.width * 0.06, fontWeight: FontWeight.bold),
+        FadeInDown(
+          delay: Duration(milliseconds: 200),
+          child: Text(
+            score,
+            style: TextStyle(
+                fontSize: textSize.width * 0.06, fontWeight: FontWeight.bold),
+          ),
         ),
       ],
     );

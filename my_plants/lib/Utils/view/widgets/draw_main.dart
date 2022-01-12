@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -87,21 +88,35 @@ class _DrawMainState extends State<DrawMain>
                                       flex: 3,
                                       child: Column(
                                         children: [
-                                          _itemMain(
-                                              "assets/images/svg/ic_favorite.svg",
-                                              ""),
-                                          _itemMain(
-                                              "assets/images/svg/ic_tip.svg",
-                                              ""),
-                                          _itemMain(
-                                              "assets/images/svg/ic_type.svg",
-                                              "types"),
-                                          _itemMain(
-                                              "assets/images/svg/ic_about.svg",
-                                              "about"),
-                                          _itemMain(
-                                              "assets/images/svg/ic_game.svg",
-                                              "game"),
+                                          FadeInLeft(
+                                            child: _itemMain(
+                                                "assets/images/svg/ic_favorite.svg",
+                                                "favorites"),
+                                          ),
+                                          FadeInLeft(
+                                            delay: Duration(milliseconds: 20),
+                                            child: _itemMain(
+                                                "assets/images/svg/ic_tip.svg",
+                                                ""),
+                                          ),
+                                          FadeInLeft(
+                                            delay: Duration(milliseconds: 70),
+                                            child: _itemMain(
+                                                "assets/images/svg/ic_type.svg",
+                                                "types"),
+                                          ),
+                                          FadeInLeft(
+                                            delay: Duration(milliseconds: 120),
+                                            child: _itemMain(
+                                                "assets/images/svg/ic_about.svg",
+                                                "about"),
+                                          ),
+                                          FadeInLeft(
+                                            delay: Duration(milliseconds: 170),
+                                            child: _itemMain(
+                                                "assets/images/svg/ic_game.svg",
+                                                "game"),
+                                          ),
                                         ],
                                       ),
                                     )

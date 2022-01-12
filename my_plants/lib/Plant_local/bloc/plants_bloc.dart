@@ -48,6 +48,14 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
         plantsRecents: plantsRecents,
       ));
     });
+    on<GetPlantsFavoritesEvent>((event, emit) async {
+      emit(GetFavoritesPlantsState(
+          plants: state.plants,
+          plantsFavorites: await dataBaseService.getFavoritesPlants(),
+          plantsRecents: state.plantsRecents,
+          idPlantsSelects: state.idPlantsSelects));
+    });
+
     on<SavedPlantEvent>((event, emit) {
       List<Plant> plants = state.plants;
       List<Plant> plantsRecents = state.plantsRecents;

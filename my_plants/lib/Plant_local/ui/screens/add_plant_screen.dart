@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -96,16 +97,19 @@ class CardAddPlant extends StatelessWidget {
             left: size.width * 0.03,
             child: Row(
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.all(Radius.circular(15)),
-                  child: Container(
-                    color: colors[Random().nextInt(colors.length)],
-                    height: size.height * 0.23,
-                    width: size.width * 0.33,
-                    child: FadeInImage(
-                        fit: BoxFit.cover,
-                        placeholder: AssetImage("assets/images/wait_plant.png"),
-                        image: NetworkImage(typePlant.picture)),
+                FadeInLeft(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(15)),
+                    child: Container(
+                      color: colors[Random().nextInt(colors.length)],
+                      height: size.height * 0.23,
+                      width: size.width * 0.33,
+                      child: FadeInImage(
+                          fit: BoxFit.cover,
+                          placeholder:
+                              AssetImage("assets/images/wait_plant.png"),
+                          image: NetworkImage(typePlant.picture)),
+                    ),
                   ),
                 ),
               ],
@@ -141,12 +145,20 @@ class CardAddPlant extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Text(
-                    "${typePlant.name}",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  FadeInDown(
+                    delay: Duration(milliseconds: 100),
+                    child: Text(
+                      "${typePlant.name}",
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  Text(typePlant.nameScientific),
-                  _buttonAdd(size)
+                  FadeInDown(
+                      delay: Duration(milliseconds: 150),
+                      child: Text(typePlant.nameScientific)),
+                  FadeInDown(
+                      delay: Duration(milliseconds: 200),
+                      child: _buttonAdd(size))
                 ],
               ),
             ),

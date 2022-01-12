@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -63,22 +64,26 @@ class TypesCard extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            typePlant.name,
-                            maxLines: 1,
-                            style: TextStyle(
-                                overflow: TextOverflow.ellipsis,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                          FadeInLeft(
+                            child: Text(
+                              typePlant.name,
+                              maxLines: 1,
+                              style: TextStyle(
+                                  overflow: TextOverflow.ellipsis,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           ),
                           Flexible(
-                            child: Container(
-                              padding: EdgeInsets.only(top: 10),
-                              child: Text(
-                                typePlant.description,
-                                maxLines: 7,
-                                style: TextStyle(
-                                  color: Colors.grey,
+                            child: FadeInUp(
+                              child: Container(
+                                padding: EdgeInsets.only(top: 10),
+                                child: Text(
+                                  typePlant.description,
+                                  maxLines: 7,
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                  ),
                                 ),
                               ),
                             ),
@@ -123,9 +128,11 @@ class _Image extends StatelessWidget {
               ),
               Align(
                 alignment: Alignment.bottomCenter,
-                child: FadeInImage(
-                    placeholder: AssetImage("assets/images/wait_plant.png"),
-                    image: NetworkImage(typePlant.picture)),
+                child: ElasticIn(
+                  child: FadeInImage(
+                      placeholder: AssetImage("assets/images/wait_plant.png"),
+                      image: NetworkImage(typePlant.picture)),
+                ),
               )
             ],
           ),

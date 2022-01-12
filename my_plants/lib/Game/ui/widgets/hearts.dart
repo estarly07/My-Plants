@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -19,9 +20,15 @@ class Hearts extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          _heart(provider.state.fails >= 1, size.width * 0.12),
-          _heart(provider.state.fails >= 2, size.width * 0.12),
-          _heart(provider.state.fails >= 3, size.width * 0.12),
+          FadeInLeft(
+              delay: Duration(milliseconds: 50),
+              child: _heart(provider.state.fails >= 1, size.width * 0.12)),
+          FadeInLeft(
+              delay: Duration(milliseconds: 100),
+              child: _heart(provider.state.fails >= 2, size.width * 0.12)),
+          FadeInLeft(
+              delay: Duration(milliseconds: 150),
+              child: _heart(provider.state.fails >= 3, size.width * 0.12)),
         ],
       ),
     );

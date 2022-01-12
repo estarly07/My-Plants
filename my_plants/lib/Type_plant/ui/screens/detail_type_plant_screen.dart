@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_plants/Utils/values/global.dart';
@@ -32,74 +33,94 @@ class DetailTypeScreen extends StatelessWidget {
                         Flexible(
                           flex: 3,
                           child: Container(
-                            child: FadeInImage(
-                                fit: BoxFit.contain,
-                                placeholder:
-                                    AssetImage("assets/images/wait_plant.png"),
-                                image: NetworkImage(typePlant.picture)),
+                            child: FadeInDown(
+                              child: FadeInImage(
+                                  fit: BoxFit.contain,
+                                  placeholder: AssetImage(
+                                      "assets/images/wait_plant.png"),
+                                  image: NetworkImage(typePlant.picture)),
+                            ),
                           ),
                         ),
                       ],
                     ),
-                    _title(txt: typePlant.name, fontSize: size.width * 0.1),
-                    Text(
-                      typePlant.nameScientific,
-                      style: TextStyle(
-                        fontSize: size.width * 0.05,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.grey[800],
+                    FadeInLeft(
+                        delay: Duration(milliseconds: 500),
+                        child: _title(
+                            txt: typePlant.name, fontSize: size.width * 0.1)),
+                    FadeInLeft(
+                      delay: Duration(milliseconds: 750),
+                      child: Text(
+                        typePlant.nameScientific,
+                        style: TextStyle(
+                          fontSize: size.width * 0.05,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.grey[800],
+                        ),
                       ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CardCarasteristic(
-                            title: typePlant.maintenance.idealTemperature,
-                            content: "Temperatura ideal"),
-                        CardCarasteristic(
-                            title: typePlant.maintenance.minimumTemperature,
-                            content: "Temperatura mínima"),
-                      ],
+                    FadeIn(
+                      delay: Duration(milliseconds: 500),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CardCarasteristic(
+                              title: typePlant.maintenance.idealTemperature,
+                              content: "Temperatura ideal"),
+                          CardCarasteristic(
+                              title: typePlant.maintenance.minimumTemperature,
+                              content: "Temperatura mínima"),
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        CardCarasteristic(
-                            title: "${typePlant.maintenance.daySummer}",
-                            content: "Cada cuanto se riega\n en verano"),
-                        CardCarasteristic(
-                            title: "${typePlant.maintenance.dayWinter}",
-                            content: "Cada cuanto se riega\n en invierno"),
-                      ],
+                    FadeIn(
+                      delay: Duration(milliseconds: 700),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          CardCarasteristic(
+                              title: "${typePlant.maintenance.daySummer}",
+                              content: "Cada cuanto se riega\n en verano"),
+                          CardCarasteristic(
+                              title: "${typePlant.maintenance.dayWinter}",
+                              content: "Cada cuanto se riega\n en invierno"),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 50,
                     ),
-                    Container(
-                      child: Text(
-                        typePlant.description,
-                        textAlign: TextAlign.justify,
-                        style: TextStyle(
-                          color: Colors.grey[850],
+                    FadeInUp(
+                      delay: Duration(milliseconds: 500),
+                      child: Container(
+                        child: Text(
+                          typePlant.description,
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(
+                            color: Colors.grey[850],
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
                       height: 25,
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        CardCarasteristic(
-                            title: "Riego",
-                            content: typePlant.maintenance.irrigation),
-                        CardCarasteristic(
-                            title: "Luz solar",
-                            content: typePlant.maintenance.sunlight),
-                      ],
+                    FadeInUp(
+                      delay: Duration(milliseconds: 1000),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          CardCarasteristic(
+                              title: "Riego",
+                              content: typePlant.maintenance.irrigation),
+                          CardCarasteristic(
+                              title: "Luz solar",
+                              content: typePlant.maintenance.sunlight),
+                        ],
+                      ),
                     ),
                   ],
                 ),

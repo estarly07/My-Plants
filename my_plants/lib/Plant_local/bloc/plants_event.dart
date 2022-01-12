@@ -22,3 +22,7 @@ class DeletePlantEvent extends PlantsEvent {
   final BuildContext context;
   DeletePlantEvent(this.context);
 }
+
+class GetPlantsFavoritesEvent extends PlantsEvent {
+  GetPlantsFavoritesEvent();
+}

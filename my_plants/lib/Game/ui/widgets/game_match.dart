@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -102,8 +103,10 @@ class _GameMatchState extends State<GameMatch> {
                             }
                           }
                         },
-                        child: CardGame(
-                          card: e,
+                        child: ElasticIn(
+                          child: CardGame(
+                            card: e,
+                          ),
                         ),
                       ))
                   .toList(),

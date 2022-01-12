@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -57,18 +58,20 @@ class TipCard extends StatelessWidget {
   Container _tip(Tip tip) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
-      child: Row(
-        children: [
-          _Icon_tip(icon: tip.picture),
-          Expanded(
-            child: Container(
-              child: ListTile(
-                title: _title("Consejo"),
-                subtitle: _content(tip.tip),
+      child: FadeInLeft(
+        child: Row(
+          children: [
+            _Icon_tip(icon: tip.picture),
+            Expanded(
+              child: Container(
+                child: ListTile(
+                  title: _title("Consejo"),
+                  subtitle: _content(tip.tip),
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
