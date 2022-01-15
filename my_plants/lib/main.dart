@@ -54,6 +54,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: MaterialApp(
         title: 'Material App',
+        debugShowCheckedModeBanner: false,
         routes: routes(),
         initialRoute: "splash",
         theme: ThemeData.light()

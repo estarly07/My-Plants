@@ -16,6 +16,7 @@ Map<String, WidgetBuilder> routes() {
     "splash": (_) => Splash(),
     "about": (_) => AboutScreen(),
     "slider": (_) => SliderScreen(),
-    "favorites": (_) => FavoritesScreen()
+    "favorites": (_) => FavoritesScreen(),
+    "tips": (_) => TipScreen(),
   };
 }

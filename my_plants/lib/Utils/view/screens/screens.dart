@@ -6,3 +6,4 @@ export 'package:my_plants/Plant_local/ui/screens/home_screen.dart';
 export 'package:my_plants/Plant_local/ui/screens/recent_screen.dart';
 export 'package:my_plants/Type_plant/ui/screens/type_plants_screen.dart';
 export 'package:my_plants/Game/ui/screens/game_screen.dart';
+export 'package:my_plants/Tip/ui/screen/tips_screen.dart';

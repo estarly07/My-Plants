@@ -26,7 +26,7 @@ class _DrawMainState extends State<DrawMain>
   @override
   void initState() {
     animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 210));
+        vsync: this, duration: const Duration(milliseconds: 150));
     super.initState();
   }
 
@@ -97,7 +97,7 @@ class _DrawMainState extends State<DrawMain>
                                             delay: Duration(milliseconds: 20),
                                             child: _itemMain(
                                                 "assets/images/svg/ic_tip.svg",
-                                                ""),
+                                                "tips"),
                                           ),
                                           FadeInLeft(
                                             delay: Duration(milliseconds: 70),
@@ -138,8 +138,8 @@ class _DrawMainState extends State<DrawMain>
           children: [
             _itemMainExpanded("assets/images/svg/ic_favorite.svg", "Favoritos",
                 width.value, "favorites"),
-            _itemMainExpanded(
-                "assets/images/svg/ic_tip.svg", "Consejos", width.value, ""),
+            _itemMainExpanded("assets/images/svg/ic_tip.svg", "Consejos",
+                width.value, "tips"),
             _itemMainExpanded("assets/images/svg/ic_type.svg",
                 "Tipos de plantas", width.value, "types"),
             _itemMainExpanded("assets/images/svg/ic_about.svg",
@@ -224,14 +224,16 @@ class _header extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            (rotation)
-                ? _ButtonExpand(
-                    angle: 3.2,
-                    animationController: animationController,
-                  )
-                : _ButtonExpand(
-                    animationController: animationController,
-                  ),
+            Align(
+              child: (rotation)
+                  ? _ButtonExpand(
+                      angle: 0.0,
+                      animationController: animationController,
+                    )
+                  : _ButtonExpand(
+                      animationController: animationController,
+                    ),
+            ),
             Container(
               margin: EdgeInsets.only(bottom: size.width * 0.02),
               child: CircleAvatar(
@@ -260,24 +262,32 @@ class _ButtonExpand extends StatelessWidget {
 
   _ButtonExpand({
     required this.animationController,
-    this.angle = 0.0,
+    this.angle = 3.2,
   });
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
-        if (angle > 0.0) {
+        if (angle == 0.0) {
           animationController.forward();
         } else {
           animationController.reverse();
         }
       },
-      child: Transform.rotate(
-        angle: angle,
-        child: Container(
-            height: 40,
-            child: SvgPicture.asset("assets/images/svg/ic_expand.svg")),
+      child: Column(
+        children: [
+          Transform.rotate(
+              angle: angle,
+              child: Container(
+                child: Icon(
+                  Icons.arrow_right_alt_sharp,
+                  size: size.height * 0.05,
+                ),
+              )),
+          Divider()
+        ],
       ),
     );
   }
