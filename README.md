@@ -5,6 +5,7 @@ An app that helps you take care of your plants and thus keep them in optimal con
 
   - Flutter programming language.
   - Clean Architecture.
+  - Bloc 
   - Service.
   - Firebase Realtime Database
 <h3>Slider</h3>
