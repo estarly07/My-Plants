@@ -40,6 +40,7 @@ dependencies:
   path_provider: ^2.0.8
   shared_preferences: ^2.0.11
   sqflite: ^2.0.1
+  url_launcher: ^6.0.18
 
 flutter_icons:
   android: "launcher_icon"

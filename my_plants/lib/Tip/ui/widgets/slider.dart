@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:lottie/lottie.dart';
 import 'package:my_plants/Slider/bloc/slider_bloc.dart';
 import 'package:my_plants/Slider/model/slider.dart';
 import 'package:my_plants/Slider/ui/widgets/widgets.dart';
 import 'package:my_plants/Tip/model/tip.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SliderItem extends StatelessWidget {
   final List<Tip> tips;
@@ -16,16 +18,36 @@ class SliderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        child: _Slide(tips
-            .map(
-              (e) => SliderModel(
-                image: e.picture,
-                title: "Consejo",
-                description: e.tip,
-              ),
-            )
-            .toList()));
+      child: _Slide(tips
+          .map(
+            (e) => SliderModel(
+              image: e.picture,
+              title: e.url,
+              description: e.tip,
+            ),
+          )
+          .toList()),
+    );
   }
+}
+
+_launchURL(BuildContext context, String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    _showToast(context);
+  }
+}
+
+void _showToast(BuildContext context) {
+  final scaffold = ScaffoldMessenger.of(context);
+  scaffold.showSnackBar(
+    SnackBar(
+      content: const Text('Added to favorite'),
+      action: SnackBarAction(
+          label: 'UNDO', onPressed: scaffold.hideCurrentSnackBar),
+    ),
+  );
 }
 
 class _Slide extends StatefulWidget {
@@ -108,58 +130,63 @@ class Slider extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return ElasticIn(
-      child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          child: Stack(
-            children: [
-              Align(
-                child: Container(
-                  width: size.width * 0.8,
-                  height: size.height * 0.6,
-                  padding: EdgeInsets.all(size.width * 0.1),
-                  decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.white,
-                            spreadRadius: -5,
-                            blurRadius: 15)
+      child: GestureDetector(
+        onTap: () => _launchURL(context, _slider.title),
+        child: Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: Stack(
+              children: [
+                Align(
+                  child: Container(
+                    width: size.width * 0.8,
+                    height: size.height * 0.6,
+                    padding: EdgeInsets.all(size.width * 0.1),
+                    decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.white,
+                              spreadRadius: -5,
+                              blurRadius: 15)
+                        ],
+                        borderRadius: BorderRadius.circular(size.width * 0.05)),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Consejo",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: size.height * 0.03),
+                        ),
+                        Align(
+                          alignment: Alignment.center,
+                          child: Container(
+                              child: SvgPicture.asset(
+                            _slider.image,
+                            width: size.width * 0.3,
+                            height: size.width * 0.3,
+                          )),
+                        ),
+                        Container(
+                          child: Text(_slider.description,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: size.height * 0.02)),
+                        ),
+                        Lottie.asset("assets/animations/tap.json",
+                            width: size.width * 0.1)
                       ],
-                      borderRadius: BorderRadius.circular(size.width * 0.05)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        _slider.title,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: size.height * 0.03),
-                      ),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Container(
-                            child: SvgPicture.asset(
-                          _slider.image,
-                          width: size.width * 0.3,
-                          height: size.width * 0.3,
-                        )),
-                      ),
-                      Container(
-                        child: Text(_slider.description,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: size.height * 0.02)),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            )),
+      ),
     );
   }
 }
