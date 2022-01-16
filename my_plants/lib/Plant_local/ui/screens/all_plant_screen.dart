@@ -74,54 +74,63 @@ class _LayoutState extends State<_Layout> {
           FadeInUp(
             child: BlocBuilder<PlantsBloc, PlantsState>(
               builder: (context, state) {
-                return GridView(
-                  shrinkWrap: true, // You won't see infinite size error
-                  physics: const NeverScrollableScrollPhysics(),
-                  children: [
-                    ...state.plants
-                        .map((plant) => GestureDetector(
-                              onTap: () {
-                                if (state.idPlantsSelects.isEmpty) {
-                                  Navigator.pushNamed(context, "detail",
-                                      arguments: plant);
-                                } else {
-                                  provider
-                                      .add(SelectPlanstEvent(plant.idPlant!));
-                                }
-                              },
-                              onLongPress: () {
-                                provider.add(SelectPlanstEvent(plant.idPlant!));
-                              },
-                              child: Stack(
-                                fit: StackFit.expand,
-                                children: [
-                                  CardPlant(
-                                    plant: plant,
-                                  ),
-                                  (state.idPlantsSelects
-                                          .contains(plant.idPlant))
-                                      ? Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.black54
-                                                  .withOpacity(0.3),
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
-                                          margin: EdgeInsets.symmetric(
-                                              vertical: (size.width * 0.013),
-                                              horizontal: 5),
-                                        )
-                                      : Container()
-                                ],
-                              ),
-                            ))
-                        .toList()
-                  ],
-                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                      maxCrossAxisExtent: (size.width * 0.5),
-                      mainAxisExtent: (size.height * 0.37),
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12),
-                );
+                return (state.plants.isEmpty)
+                    ? NoItems(
+                        animation: "assets/animations/no_plants.json",
+                        title: "No tienes plantas!!",
+                        showArrowDown: true,
+                        description: "Añade plantas en el boton de abajo.")
+                    : GridView(
+                        shrinkWrap: true, // You won't see infinite size error
+                        physics: const NeverScrollableScrollPhysics(),
+                        children: [
+                          ...state.plants
+                              .map((plant) => GestureDetector(
+                                    onTap: () {
+                                      if (state.idPlantsSelects.isEmpty) {
+                                        Navigator.pushNamed(context, "detail",
+                                            arguments: plant);
+                                      } else {
+                                        provider.add(
+                                            SelectPlanstEvent(plant.idPlant!));
+                                      }
+                                    },
+                                    onLongPress: () {
+                                      provider.add(
+                                          SelectPlanstEvent(plant.idPlant!));
+                                    },
+                                    child: Stack(
+                                      fit: StackFit.expand,
+                                      children: [
+                                        CardPlant(
+                                          plant: plant,
+                                        ),
+                                        (state.idPlantsSelects
+                                                .contains(plant.idPlant))
+                                            ? Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.black54
+                                                        .withOpacity(0.3),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10)),
+                                                margin: EdgeInsets.symmetric(
+                                                    vertical:
+                                                        (size.width * 0.013),
+                                                    horizontal: 5),
+                                              )
+                                            : Container()
+                                      ],
+                                    ),
+                                  ))
+                              .toList()
+                        ],
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                            maxCrossAxisExtent: (size.width * 0.5),
+                            mainAxisExtent: (size.height * 0.37),
+                            crossAxisSpacing: 12,
+                            mainAxisSpacing: 12),
+                      );
               },
             ),
           ),

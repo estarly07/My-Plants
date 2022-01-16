@@ -71,28 +71,34 @@ class _LayoutState extends State<_Layout> {
           _tip(),
           BlocBuilder<PlantsBloc, PlantsState>(
             builder: (context, state) {
-              return GridView(
-                shrinkWrap: true, // You won't see infinite size error
-                physics: NeverScrollableScrollPhysics(),
-                children: [
-                  ...state.plantsRecents
-                      .map((plant) => GestureDetector(
-                            onTap: () {
-                              /*  plantsBloc.add(SelectPlantEvent(plant));
+              return (state.plantsFavorites.isEmpty)
+                  ? NoItems(
+                      animation: "assets/animations/no_plants_two.json",
+                      title: "No tienes plantas que necesiten agua",
+                      width: size.width,
+                      description: "Espera hasta que una planta necesite agua.")
+                  : GridView(
+                      shrinkWrap: true, // You won't see infinite size error
+                      physics: NeverScrollableScrollPhysics(),
+                      children: [
+                        ...state.plantsRecents
+                            .map((plant) => GestureDetector(
+                                  onTap: () {
+                                    /*  plantsBloc.add(SelectPlantEvent(plant));
                               Navigator.pushNamed(context, "detail"); */
-                            },
-                            child: CardPlant(
-                              plant: plant,
-                            ),
-                          ))
-                      .toList()
-                ],
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: (size.width * 0.5),
-                    mainAxisExtent: (size.height * 0.37),
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12),
-              );
+                                  },
+                                  child: CardPlant(
+                                    plant: plant,
+                                  ),
+                                ))
+                            .toList()
+                      ],
+                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: (size.width * 0.5),
+                          mainAxisExtent: (size.height * 0.37),
+                          crossAxisSpacing: 12,
+                          mainAxisSpacing: 12),
+                    );
             },
           ),
         ]);
