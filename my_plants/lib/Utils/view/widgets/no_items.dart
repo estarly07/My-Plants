@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -27,28 +28,36 @@ class NoItems extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Lottie.asset(animation,
-              repeat: true,
-              animate: true,
-              width: (width == 0.0) ? size.width * 0.5 : width),
-          Text(
-            title,
-            textAlign: TextAlign.center,
-            maxLines: 1,
-            style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: size.height * 0.03),
+          ElasticInDown(
+              duration: Duration(milliseconds: 750),
+              child: Lottie.asset(animation,
+                  repeat: true,
+                  animate: true,
+                  width: (width == 0.0) ? size.width * 0.5 : width)),
+          ElasticInUp(
+            duration: Duration(milliseconds: 500),
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              maxLines: 2,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: size.height * 0.03),
+            ),
           ),
           SizedBox(
             height: 10,
           ),
-          Text(
-            description,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.grey,
-              fontSize: size.height * 0.02,
+          ElasticInUp(
+            duration: Duration(milliseconds: 650),
+            child: Text(
+              description,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: size.height * 0.02,
+              ),
             ),
           ),
           (showArrowDown)

@@ -71,6 +71,20 @@ class DataBaseService {
     return list;
   }
 
+  Future<List<Plant>> searchPlants(String nameSearched) async {
+    final db = await DB.db.instanceDB;
+    List<Plant> list = [];
+    print("object");
+    if (nameSearched == "") {
+      return list;
+    }
+    final response = await db.rawQuery(
+        "SELECT * FROM $nameTablePlant WHERE $name like '$nameSearched%'");
+    list = response.map((e) => Plant.fromJson(e)).toList();
+    print(list.toString());
+    return list;
+  }
+
   Future updateNamePlant(String newName, int id) async {
     final db = await DB.db.instanceDB;
     db.rawQuery(

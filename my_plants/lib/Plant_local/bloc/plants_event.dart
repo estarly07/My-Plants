@@ -26,3 +26,8 @@ class DeletePlantEvent extends PlantsEvent {
 class GetPlantsFavoritesEvent extends PlantsEvent {
   GetPlantsFavoritesEvent();
 }
+
+class SearchPlantsEvent extends PlantsEvent {
+  final String name;
+  SearchPlantsEvent(this.name);
+}

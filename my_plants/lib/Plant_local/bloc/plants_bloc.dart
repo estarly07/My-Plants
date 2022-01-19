@@ -14,8 +14,10 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
     on<GetPlanstEvent>((event, emit) async {
       List<Plant> allPlants = await dataBaseService.getAllPlants();
       List<Plant> plantsRecents = await dataBaseService.getRecentsPlants();
-      emit(
-          GetPlantsLocalState(plants: allPlants, plantsRecents: plantsRecents));
+      emit(GetPlantsLocalState(
+          plants: allPlants,
+          plantsRecents: plantsRecents,
+          plantsSearched: state.plantsSearched));
     });
 
     on<SelectPlanstEvent>((event, emit) => {
@@ -44,6 +46,7 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
       });
 
       emit(GetPlantsLocalState(
+        plantsSearched: state.plantsSearched,
         plants: plants,
         plantsRecents: plantsRecents,
       ));
@@ -54,6 +57,14 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
           plantsFavorites: await dataBaseService.getFavoritesPlants(),
           plantsRecents: state.plantsRecents,
           idPlantsSelects: state.idPlantsSelects));
+    });
+    on<SearchPlantsEvent>((event, emit) async {
+      emit(SearchPlantsState(
+          plants: state.plants,
+          plantsFavorites: state.plantsFavorites,
+          plantsRecents: state.plantsRecents,
+          idPlantsSelects: state.idPlantsSelects,
+          searchPlants: await dataBaseService.searchPlants(event.name)));
     });
 
     on<SavedPlantEvent>((event, emit) {
@@ -78,6 +89,7 @@ class PlantsBloc extends Bloc<PlantsEvent, PlantsState> {
 
       dataBaseService.plantSaved(event.saved, event.idPlant);
       emit(GetPlantsLocalState(
+        plantsSearched: state.plantsSearched,
         plants: plants,
         plantsRecents: plantsRecents,
       ));

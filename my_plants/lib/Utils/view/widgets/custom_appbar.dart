@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_plants/Utils/values/global.dart';
 
 class CustomAppbar extends StatelessWidget {
   final List<String> icons;
@@ -22,7 +23,19 @@ class CustomAppbar extends StatelessWidget {
           ...icons
               .map((e) => GestureDetector(
                     onTap: () {
-                      Scaffold.of(context).openDrawer();
+                      switch (e) {
+                        case "assets/images/svg/ic_menu.svg":
+                          Scaffold.of(context).openDrawer();
+
+                          break;
+                        case "assets/images/svg/ic_search.svg":
+                          Navigator.pushNamed(context, "search");
+
+                          break;
+                        default:
+                          Navigator.pop(context);
+                          break;
+                      }
                     },
                     child: Container(
                         height: 30,
