@@ -8,3 +8,4 @@ export 'package:my_plants/Type_plant/ui/screens/type_plants_screen.dart';
 export 'package:my_plants/Game/ui/screens/game_screen.dart';
 export 'package:my_plants/Tip/ui/screen/tips_screen.dart';
 export 'package:my_plants/Plant_local/ui/screens/search_screen.dart';
+export 'package:my_plants/User/ui/screen/login.dart';

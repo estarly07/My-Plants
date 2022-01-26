@@ -38,6 +38,7 @@ dependencies:
   http: ^0.13.4
   lottie: ^1.2.1
   path_provider: ^2.0.8
+  provider: ^6.0.2
   shared_preferences: ^2.0.11
   sqflite: ^2.0.1
   url_launcher: ^6.0.18

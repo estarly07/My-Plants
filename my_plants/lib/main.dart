@@ -2,6 +2,7 @@ import 'package:android_alarm_manager/android_alarm_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/Slider/bloc/slider_bloc.dart';
+import 'package:my_plants/User/bloc/user_bloc.dart';
 import 'package:my_plants/Utils/bloc/bloc.dart';
 import 'package:my_plants/Plant_local/repository/services/alarm_service.dart';
 import 'package:my_plants/Utils/services/services.dart';
@@ -50,13 +51,14 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(create: (_) => TipsBloc()),
         BlocProvider(create: (_) => PlantsBloc()),
         BlocProvider(create: (_) => GameBloc()),
-        BlocProvider(create: (_) => SliderBloc())
+        BlocProvider(create: (_) => SliderBloc()),
+        BlocProvider(create: (_) => UserBloc()),
       ],
       child: MaterialApp(
         title: 'Material App',
         debugShowCheckedModeBanner: false,
         routes: routes(),
-        initialRoute: "splash",
+        initialRoute: "login",
         theme: ThemeData.light()
             .copyWith(scaffoldBackgroundColor: Colors.grey[100]),
       ),

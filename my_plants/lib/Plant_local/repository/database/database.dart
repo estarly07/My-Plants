@@ -20,7 +20,11 @@ class DB {
   Future<Database> initDb() async {
     Directory directory = await getApplicationDocumentsDirectory();
     final path = join(directory.path, nameDataBase);
-
+    const nameTableUser = "User";
+    const nameUser = "user";
+    const idUser = "pass";
+    const password = "age";
+    const age = "id";
     return await openDatabase(
       path,
       version: version,
@@ -35,7 +39,15 @@ class DB {
           days INTEGER,
           saved BOOLEAN,
           type_plant INTEGER
-        )
+        );
+        ''');
+        await db.execute('''
+        CREATE TABLE User(
+          user TEXT,
+          pass TEXT,
+          age TEXT,
+          id INTEGER PRIMARY KEY AUTOINCREMENT
+        );
         ''');
       },
     );

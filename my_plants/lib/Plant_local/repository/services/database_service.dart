@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:my_plants/Plant_local/repository/database/database.dart';
+import 'package:my_plants/User/model/User.dart';
 import 'package:my_plants/Utils/values/global.dart';
 import 'package:my_plants/Plant_local/model/plant_local.dart';
 
@@ -69,6 +70,20 @@ class DataBaseService {
     List<Plant> list = [];
     list = response.map((e) => Plant.fromJson(e)).toList();
     return list;
+  }
+
+  Future<User> login(String nameU, String pass) async {
+    final db = await DB.db.instanceDB;
+    final response = (await db.rawQuery(
+        "SELECT * FROM $nameTableUser WHERE $name = '$nameU' AND $password = '$pass' "));
+    print(response.map((e) => e).first);
+    return User.fromJson(response.map((e) => e).first);
+  }
+
+  Future<User> register(User user) async {
+    final db = await DB.db.instanceDB;
+    final response = await db.insert(nameTableUser, user.toJson());
+    return await login(user.user, user.pass);
   }
 
   Future<List<Plant>> searchPlants(String nameSearched) async {

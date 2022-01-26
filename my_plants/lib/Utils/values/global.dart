@@ -34,13 +34,20 @@ const version = 1;
 //-------TABLA PLANTS
 const nameTablePlant = "Plants";
 const idPlant = "idPlant";
-const name = "name";
+const name = "user";
 const nameScientific = "name_scientific";
 const daySummer = "day_summer";
 const dayWinter = "day_winter";
 const days = "days";
 const typePlant = "type_plant";
 const saved = "saved";
+//-------------------
+//-------TABLA USER
+const nameTableUser = "User";
+const nameUser = "user";
+const idUser = "id";
+const password = "pass";
+const age = "age";
 //-------------------
 
 double calculatePorcentage(int today, int lastDay) =>
