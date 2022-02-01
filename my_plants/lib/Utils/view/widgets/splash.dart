@@ -4,6 +4,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:my_plants/User/bloc/user_bloc.dart';
 import 'package:my_plants/Utils/services/services.dart';
 
 class Splash extends StatefulWidget {
@@ -28,7 +31,13 @@ class _SplashState extends State<Splash> {
     final size = MediaQuery.of(context).size;
     startTimer();
     return Scaffold(
-      body: Center(
+        body: BlocBuilder<UserBloc, UserState>(builder: (context, state) {
+      if (state.user != null) {
+        SchedulerBinding.instance!.addPostFrameCallback((_) {
+          Navigator.pushReplacementNamed(context, "home");
+        });
+      }
+      return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -79,8 +88,8 @@ class _SplashState extends State<Splash> {
             ),
           ],
         ),
-      ),
-    );
+      );
+    }));
   }
 
   void startTimer() {
@@ -88,9 +97,14 @@ class _SplashState extends State<Splash> {
     _timer = Timer.periodic(oneDecimal, (Timer timer) => nextScreen());
   }
 
-  nextScreen() {
+  nextScreen() async {
     _timer!.cancel();
-    Navigator.pushReplacementNamed(
-        context, Preferences().firtTime ? "home" : "slider");
+    final id = Preferences().id;
+    print(id);
+    if (id != 0) {
+      BlocProvider.of<UserBloc>(context, listen: false).add(SearchEvent());
+    } else {
+      Navigator.pushReplacementNamed(context, "login");
+    }
   }
 }

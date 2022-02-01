@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:lottie/lottie.dart';
+import 'package:my_plants/User/bloc/user_bloc.dart';
 
 import 'package:my_plants/Utils/bloc/bloc.dart';
 import 'package:my_plants/Utils/services/services.dart';
@@ -18,7 +19,9 @@ class HomeScreen extends StatelessWidget {
         .add(GetAllPlantEvent());
     BlocProvider.of<TipsBloc>(context, listen: false).add(GetTipsEvent());
     return Scaffold(
-      drawer: DrawMain(),
+      drawer: DrawMain(
+        user: BlocProvider.of<UserBloc>(context, listen: false).state.user!,
+      ),
       body: RefreshIndicator(
         onRefresh: () {
           return getPlants(context);

@@ -3,10 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_plants/User/model/User.dart';
 
 class DrawMain extends StatefulWidget {
+  final User user;
   const DrawMain({
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -72,6 +75,7 @@ class _DrawMainState extends State<DrawMain>
                                   children: [
                                     _header(
                                       animationController: animationController,
+                                      user: widget.user,
                                     ),
                                     _body()
                                   ],
@@ -83,6 +87,7 @@ class _DrawMainState extends State<DrawMain>
                                     _header(
                                       animationController: animationController,
                                       rotation: true,
+                                      user: widget.user,
                                     ),
                                     Flexible(
                                       flex: 3,
@@ -207,11 +212,13 @@ class _DrawMainState extends State<DrawMain>
 
 class _header extends StatelessWidget {
   bool rotation; //know whether to turn the arrow
+  final User user;
   final AnimationController animationController;
   _header({
     this.rotation = false,
     required this.animationController,
     Key? key,
+    required this.user,
   }) : super(key: key);
 
   @override
@@ -238,7 +245,7 @@ class _header extends StatelessWidget {
               margin: EdgeInsets.only(bottom: size.width * 0.02),
               child: CircleAvatar(
                 maxRadius: 25,
-                child: Text("Es"),
+                child: Text(user.user.substring(0, 2)),
               ),
             ),
             Container(

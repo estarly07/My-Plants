@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
         title: 'Material App',
         debugShowCheckedModeBanner: false,
         routes: routes(),
-        initialRoute: "login",
+        initialRoute: "splash",
         theme: ThemeData.light()
             .copyWith(scaffoldBackgroundColor: Colors.grey[100]),
       ),

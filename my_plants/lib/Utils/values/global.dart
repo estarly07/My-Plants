@@ -34,7 +34,7 @@ const version = 1;
 //-------TABLA PLANTS
 const nameTablePlant = "Plants";
 const idPlant = "idPlant";
-const name = "user";
+const name = "name";
 const nameScientific = "name_scientific";
 const daySummer = "day_summer";
 const dayWinter = "day_winter";

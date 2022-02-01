@@ -17,3 +17,5 @@ class RegisterEvent extends UserEvent {
 
   RegisterEvent(this.age, this.name, this.pass);
 }
+
+class SearchEvent extends UserEvent {}

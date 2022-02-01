@@ -6,6 +6,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_plants/User/bloc/user_bloc.dart';
 import 'package:my_plants/User/ui/widget/widgets.dart';
+import 'package:my_plants/Utils/services/services.dart';
 import 'package:my_plants/Utils/view/widgets/background_screen_custom.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -112,6 +113,7 @@ class Register extends StatelessWidget {
         print("hola");
         if (state.user != null) {
           print("hola");
+          Preferences().id = state.user!.id!;
           SchedulerBinding.instance!.addPostFrameCallback((_) {
             Navigator.pushReplacementNamed(context, "slider");
           });
@@ -239,6 +241,7 @@ class Login extends StatelessWidget {
         print("hola Login ${state.user}");
         if (state.user != null) {
           print("hola");
+          Preferences().id = state.user!.id!;
           SchedulerBinding.instance!.addPostFrameCallback((_) {
             Navigator.pushReplacementNamed(context, "slider");
           });

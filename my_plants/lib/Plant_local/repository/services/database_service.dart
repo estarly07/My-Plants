@@ -72,11 +72,19 @@ class DataBaseService {
     return list;
   }
 
-  Future<User> login(String nameU, String pass) async {
+  Future<User> login(String name, String pass) async {
     final db = await DB.db.instanceDB;
     final response = (await db.rawQuery(
-        "SELECT * FROM $nameTableUser WHERE $name = '$nameU' AND $password = '$pass' "));
+        "SELECT * FROM $nameTableUser WHERE $nameUser = '$name' AND $password = '$pass' "));
     print(response.map((e) => e).first);
+    return User.fromJson(response.map((e) => e).first);
+  }
+
+  Future<User> searchUser(int id) async {
+    final db = await DB.db.instanceDB;
+    final response =
+        (await db.rawQuery("SELECT * FROM $nameTableUser WHERE $idUser = $id"));
+    print("HOLA ${response.map((e) => e).first}");
     return User.fromJson(response.map((e) => e).first);
   }
 
